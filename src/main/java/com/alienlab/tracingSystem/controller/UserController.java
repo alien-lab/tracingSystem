@@ -27,7 +27,7 @@ public class UserController {
     //用户登录
     @ApiOperation(value="用户登录")
     @PostMapping(value = "/dologin")
-    public ResponseEntity dologin(@RequestBody String loginname,@RequestBody String password,HttpServletRequest request){
+    public ResponseEntity dologin(@RequestParam String loginname,@RequestParam String password,HttpServletRequest request){
         User user=userService.findUserByLoginname(loginname);
         if(user==null){
             ExecResult er= new ExecResult(false,"登录用户不存在");
@@ -42,5 +42,9 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
             }
         }
+    }
+    @GetMapping(value = "/dologin")
+    public ResponseEntity dologin(){
+        return ResponseEntity.ok().body("success");
     }
 }
