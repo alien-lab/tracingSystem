@@ -1,0 +1,32 @@
+[
+  {
+    "text": "绿之源鲜果溯源系统",
+    "heading": "true"
+  },
+  {
+    "text": "绿之源农场",
+    "sref": "lvzhiyuan.farm",
+    "icon": "fa fa-smile-o"
+  },
+  {
+    "text": "绿之源产品",
+    "sref": "lvzhiyuan.product",
+    "icon": "fa fa-soccer-ball-o"
+  },
+  {
+    "text": "批次管理",
+    "sref": "lvzhiyuan.batch",
+    "icon": "fa fa-reorder"
+  },
+  {
+    "text": "批次查询",
+    "sref": "lvzhiyuan.batchQuery",
+    "icon": "fa fa-reorder"
+  },
+  {
+    "text": "详情管理",
+    "sref": "lvzhiyuan.desc",
+    "icon": "fa fa-reorder"
+  }
+
+]
