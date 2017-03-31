@@ -1,15 +1,15 @@
 [
   {
-    "text": "绿之源鲜果溯源系统",
+    "text": "绿之源鲜果订单溯源系统",
     "heading": "true"
   },
   {
-    "text": "绿之源农场",
+    "text": "农场管理",
     "sref": "lvzhiyuan.farm",
-    "icon": "fa fa-smile-o"
+    "icon": "fa fa-home"
   },
   {
-    "text": "绿之源产品",
+    "text": "产品管理",
     "sref": "lvzhiyuan.product",
     "icon": "fa fa-soccer-ball-o"
   },

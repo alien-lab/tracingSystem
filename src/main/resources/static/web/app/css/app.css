@@ -936,10 +936,11 @@ _:-ms-lang(x),
 .topnavbar .navbar-header .brand-logo > img,
 .topnavbar .navbar-header .brand-logo-collapsed > img {
   margin: 0 auto;
+  width:145px;
+  height:60px;
 }
 .topnavbar .navbar-header .brand-logo {
   display: block;
-  padding: 10px 15px;
 }
 .topnavbar .navbar-header .brand-logo-collapsed {
   display: none;
@@ -1132,6 +1133,8 @@ _:-ms-lang(x),
   }
   .aside-collapsed .topnavbar .navbar-header .brand-logo-collapsed {
     display: block;
+    width:80px;
+    height:60px;
   }
   .aside-collapsed .topnavbar .navbar-header {
     width: 70px;

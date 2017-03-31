@@ -26,10 +26,62 @@
             'app.translate',
             'app.settings',
             'app.utils',
+            'lvzhiyuan.farm'
         ]);
 })();
 
+(function(){
+    'use strict';
+    var app=angular.module('angle');
+    app.config(["$httpProvider",function($httpProvider){
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
+        // Override $http service's default transformRequest
+        $httpProvider.defaults.transformRequest = [function(data) {
+            /**
+             * The workhorse; converts an object to x-www-form-urlencoded serialization.
+             * @param {Object} obj
+             * @return {String}
+             */
+            var param = function(obj) {
+                var query = '';
+                var name, value, fullSubName, subName, subValue, innerObj, i;
+
+                for (name in obj) {
+                    value = obj[name];
+
+                    if (value instanceof Array) {
+                        for (i = 0; i < value.length; ++i) {
+                            subValue = value[i];
+                            fullSubName = name + '[' + i + ']';
+                            innerObj = {};
+                            innerObj[fullSubName] = subValue;
+                            query += param(innerObj) + '&';
+                        }
+                    } else if (value instanceof Object) {
+                        for (subName in value) {
+                            subValue = value[subName];
+                            fullSubName = name + '[' + subName + ']';
+                            innerObj = {};
+                            innerObj[fullSubName] = subValue;
+                            query += param(innerObj) + '&';
+                        }
+                    } else if (value !== undefined && value !== null) {
+                        query += encodeURIComponent(name) + '='
+                            + encodeURIComponent(value) + '&';
+                    }
+                }
+
+                return query.length ? query.substr(0, query.length - 1) : query;
+            };
+
+            return angular.isObject(data) && String(data) !== '[object File]'
+                ? param(data)
+                : data;
+        }];
+    }]);
+})();
 (function() {
     'use strict';
 
@@ -49,6 +101,7 @@
             'ui.utils'
         ]);
 })();
+
 (function() {
     'use strict';
 
@@ -359,13 +412,14 @@
                     password:$scope.login.password
                 },function(result){
                     console.log(result);
-                    if(result.result>0){//登录成功
+                    if(result != null ){//登录成功
+                        alert("登录成功");
                         console.log("登陆成功")
                        $rootScope.user=result.data;
-                      // $state.go("lvzhiyuan.farm");//登录成功跳转到主页
+                       $state.go("lvzhiyuan.farm");//登录成功跳转到主页
                         // Put cookie
                         $cookieStore.put("user",
-                            {account: result.data.account,password:  result.data.password},{
+                            {account: result.loginname,password:  result.password},{
                                 expires: new Date(new Date().getTime() + 60000)
                             });
                        var favoriteCookie = $cookieStore.get('user').account;
@@ -1246,9 +1300,9 @@
 
         function activate() {
           $rootScope.user = {
-            name:     'John',
-            job:      'ng-developer',
-            picture:  'app/img/user/02.jpg'
+            name:     '刘晓凡',
+            job:      '开发者',
+            picture:  'app/img/user/defaulthead.png'
           };
 
           // Hides/show user avatar on sidebar

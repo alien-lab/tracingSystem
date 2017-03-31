@@ -43,8 +43,8 @@ public class UserController {
             }
         }
     }
-    @GetMapping(value = "/dologin")
+    /*@GetMapping(value = "/dologin")
     public ResponseEntity dologin(){
         return ResponseEntity.ok().body("success");
-    }
+    }*/
 }
