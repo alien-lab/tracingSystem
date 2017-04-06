@@ -47,20 +47,23 @@
                 size: "lg",
                 backdrop: false
             });
-           /* modalInstance.result.then(function (data) {
-                console.log("最后一步"+ data);
+
+            console.log("ruotianjia"+modalInstance.result);
+           modalInstance.result.then(function (data) {
+             /*   console.log("最后一步"+ data);
                 console.log("最后一步"+ data.result);
+                console.log("最后一步"+ data.data);*/
                 //添加保存成功
                 if(data.result > 0) {
                     var farm = data.data;
-                    console.log("显示新增农场"+farm);
+                    console.log("显示新增农场"+farm.farmName);
                     $scope.farm_data.content.push(farm);
                 }
             }, function(flag) {
                 if(flag.indexOf("back") >= 0) {
                     return false;
                 }
-            })*/
+            })
         }
         //2.删除农场
         $scope.deleteFarm=function(farmid){
@@ -80,7 +83,7 @@
                 },
                 backdrop:true
             });
-
+            console.log("rrr"+promitInstance.result);
             promitInstance.result.then(function(){
                 farmService.deleteFarm(farmid,function(data){
                     if(data.result > 0) {
@@ -108,10 +111,11 @@
                 size: "lg",
                 backdrop: false
             });
-
+            console.log("genxin"+ data);
+            console.log("genxin"+ data.result);
+            console.log("genxin"+ data.data);
             modalInstance.result.then(function(data) {
                 if(data.result >0) {
-
                 }
             }, function(flag) {
                 if(flag.indexOf("back") >= 0) {
@@ -120,8 +124,79 @@
             });
 
         }
+        //4.全选功能
+        $scope.selectall = function selectall(){
+            for(var i=0; i<$scope.farm_data.content.length; i++) {
+                if($scope.$isselectall) {
+                    $scope.farm_data.content[i].$isselected = true;
+                } else {
+                    $scope.farm_data.content[i].$isselected = false;
+                }
+            }
+        }
+        //5.批量删除功能：先实现获取到选中的几项
+        $scope.getSelects = function() {
+            var selects = [];
+            for(var i=0; i<$scope.farm_data.content.length; i++) {
+                if($scope.farm_data.content[i].$isselected) {
+                    selects.push($scope.farm_data.content[i]);
+                }
+            }
+            return selects;
+        }
+        //然后进行批量删除
+        $scope.deletefarms = deleteFarms;
+        function deleteFarms() {
+            if($scope.getSelects().length == 0) {
+                return;
+            }
+            var promitInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'lvzhiyuan/farm/promit.html',
+                controller:function($scope,$uibModalInstance){
+                    $scope.title="操作确认";
+                    $scope.text="确认对所选农场执行删除操作吗？";
+                    $scope.cancel=function(){
+                        $uibModalInstance.dismiss('cancel');
+                    }
+                    $scope.save=function(){
+                        $uibModalInstance.close("ok");
+                    }
+                },
+                backdrop:true
+            });
 
+            promitInstance.result.then(function(){
+                var bjs = [];
+                for(var i=0; i<$scope.farm_data.content.length; i++) {
+                    if($scope.farm_data.content[i].$isselected) {
+                        farmService.deleteFarm($scope.farm_data.content[i].id,function(data,farmid){
+                            if(data.result > 0) {
+                                bjs.push(farmid);
+                                for(var k=0; k<$scope.farm_data.content.length; k++) {
+                                    for(var j=0; j<bjs.length; j++) {
+                                        if($scope.farm_data.content[k].id == bjs[j]) {
+                                            $scope.farm_data.content.splice(k,1);
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
 
+        //6.查看某农场的详情
+        $scope.tofarmItem=function(farm){
+            farminstance.currentFarm=farm;
+            var farmItemModal = $uibModal.open({
+                animation: true,
+                templateUrl: 'lvzhiyuan/farm/farmItem.html',
+                controller:'farmItemController',
+                backdrop:true
+            });
+        }
     }]);
 
    farm_module.controller("addFarmController",["$scope","farmService","$uibModalInstance","$rootScope",function($scope,farmService,$uibModalInstance,$rootScope){
@@ -131,9 +206,23 @@
             $scope.loading = true;
             farmService.addFarm({
                 farmName:$scope.form.farmName
+            },function (data) {
+                $scope.loading=false;
+                console.log("wwww"+data.result);
+                if(data.result>0){
+                    $uibModalInstance.close(data);
+                }else{
+                    $scope.error = {
+                        haserror: true,
+                        errormsg: "添加失败，您可以再试一次！"
+                    }
+                }
+            });
+            /*farmService.addFarm({
+                farmName:$scope.form.farmName
             },function (result) {
                 console.log(result);
-            });
+            });*/
 
         }
         $scope.cancel = function cancel(flag){
@@ -152,10 +241,10 @@
             farmService.updateFarm({
                 farmid:$scope.form.id,
                 farmName:$scope.form.farmName
-            },function(result) {
-                console.log(result);
-                $scope.loading = false;
-                if(result !=null) {
+            },function(data) {
+                $scope.loading=false;
+                console.log(data);
+                if(data.result>0) {
                     $uibModalInstance.close(data);
                 } else {
                     $scope.error = {
@@ -197,6 +286,8 @@
             }).then(function(response) {
                 console.log(response);
                 callback(response.data);
+            },function (response) {
+                console.log("ghjuk"+response);
             });
         }
         //2.删除农场

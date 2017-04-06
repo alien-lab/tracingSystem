@@ -3,7 +3,8 @@ package com.alienlab.tracingSystem.entity;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
-import java.security.Timestamp;
+import java.sql.Timestamp;
+
 
 /**
  * Created by master on 2017/3/26.
@@ -38,7 +39,7 @@ public class DescItem {
     public DescItem() {
     }
 
-    public DescItem( String itemType, String itemLabel, String itemContent, String itemFile, String itemFileContentType, String itemLink, Timestamp itemTime, Integer itemOrder) {
+    public DescItem( String itemType, String itemLabel, String itemContent, String itemFile, String itemFileContentType, String itemLink, Timestamp itemTime, Integer itemOrder/*,String itemStatus*/) {
         this.itemType = itemType;
         this.itemLabel = itemLabel;
         this.itemContent = itemContent;
@@ -47,6 +48,7 @@ public class DescItem {
         this.itemLink = itemLink;
         this.itemTime = itemTime;
         this.itemOrder = itemOrder;
+       // this.itemStatus=itemStatus;
     }
 
     public long getId() {

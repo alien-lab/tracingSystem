@@ -26,7 +26,10 @@
             'app.translate',
             'app.settings',
             'app.utils',
-            'lvzhiyuan.farm'
+            'lvzhiyuan.farm',
+            'lvzhiyuan.farmItem',
+            'lvzhiyuan.desc',
+            'app.pager'
         ]);
 })();
 
@@ -413,7 +416,6 @@
                 },function(result){
                     console.log(result);
                     if(result != null ){//登录成功
-                        alert("登录成功");
                         console.log("登陆成功")
                        $rootScope.user=result.data;
                        $state.go("lvzhiyuan.farm");//登录成功跳转到主页

@@ -45,4 +45,8 @@ public class FarmInfoService {
             return null;
         }
     }
+    //4.通过farmid找农场
+    public FarmInfo getFarmInfoById(Long farmid){
+        return farmInfoRepository.findOne(farmid);
+    }
 }

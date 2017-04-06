@@ -13748,8 +13748,8 @@
 		 *    };
 		 */
 		pager: {},
-	
-	
+
+        app.pager
 		renderer: {
 			pageButton: {},
 			header: {}

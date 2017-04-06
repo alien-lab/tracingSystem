@@ -1,5 +1,6 @@
 package com.alienlab.tracingSystem.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alienlab.tracingSystem.Repository.FarmInfoRepository;
 import com.alienlab.tracingSystem.db.ExecResult;
 import com.alienlab.tracingSystem.entity.FarmInfo;
@@ -42,8 +43,10 @@ public class FarmInfoController {
                  return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
              }
              else{
-                 ExecResult success= new ExecResult(true,"添加农场信息成功");
-                 return ResponseEntity.ok().body(success);
+                 ExecResult er = new ExecResult();
+                 er.setResult(true);
+                 er.setData((JSON) com.alibaba.fastjson.JSON.toJSON(result));
+                 return ResponseEntity.ok().body(er);
              }
     }
     @ApiOperation(value="删除某个农场基本信息")
@@ -65,18 +68,20 @@ public class FarmInfoController {
     }
     @ApiOperation(value="更新农场的基本信息")
     @PostMapping(value = "/updateFarm")
-    public ResponseEntity updateFarm( @RequestParam Long farmId,@RequestParam String farmName){
+    public ResponseEntity updateFarm( @RequestParam Long farmid,@RequestParam String farmName){
         FarmInfo farmInfo=new FarmInfo();
         farmInfo.setFarmName(farmName);
-        farmInfo.setId(farmId);
+        farmInfo.setId(farmid);
         FarmInfo result=farmInfoService.updateFarm(farmInfo);
         if(result==null){
             ExecResult er= new ExecResult(false,"更新农场信息出现异常");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
         }
         else{
-            ExecResult success= new ExecResult(true,"更新农场信息成功");
-            return ResponseEntity.ok().body(success);
+            ExecResult er = new ExecResult();
+            er.setResult(true);
+            er.setData((JSON) com.alibaba.fastjson.JSON.toJSON(result));
+            return ResponseEntity.ok().body(er);
         }
     }
     /*@GetMapping(value = "/addFarm")
