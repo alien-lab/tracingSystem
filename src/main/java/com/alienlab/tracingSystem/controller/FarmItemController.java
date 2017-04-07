@@ -20,7 +20,9 @@ import java.util.List;
 /**
  * Created by master on 2017/3/26.
  */
-
+@Api(value="/api/farmItem",description="产品详情Api")
+@RestController
+@RequestMapping(value = "/farmctrl")
 public class FarmItemController {
     @Autowired
     private FarmInfoService farmInfoService;
