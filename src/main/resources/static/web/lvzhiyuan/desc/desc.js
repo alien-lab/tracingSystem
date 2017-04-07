@@ -38,24 +38,45 @@
                 }
                 scope.save=function(){
                     console.log("ww"+scope.type);
-                    $http({
-                        url:'/desc/addDesc',
-                        method:'POST',
-                        data:{
-                            type:scope.type,
-                            text:scope.text,
-                            link:scope.link,
-                            label:scope.label,
-                            file:(scope.image)?(scope.image.file):null,
-                        },
-                    }).then(function (data, status, headers, config) {
-                        console.log("添加详情"+data.data);
-                        if(data.data.id>0){
-                            scope.descid=data.data.id;
-                            scope.item=data.data;
-                            scope.cancel();
-                        }
-                    });
+                    if(scope.type=="image"){
+                        $http({
+                            url:'/desc/addDescImage',
+                            method:'POST',
+                            data:{
+                                type:scope.type,
+                                text:scope.text,
+                                link:scope.link,
+                                label:scope.label,
+                                file:(scope.image)?(scope.image.file):null
+                            },
+                        }).then(function (data, status, headers, config) {
+                            console.log("添加详情"+data.data);
+                            if(data.data.id>0){
+                                scope.descid=data.data.id;
+                                scope.item=data.data;
+                                scope.cancel();
+                            }
+                        });
+                    }else{
+                        $http({
+                            url:'/desc/addDescText',
+                            method:'POST',
+                            data:{
+                                type:scope.type,
+                                text:scope.text,
+                                link:scope.link,
+                                label:scope.label
+                            },
+                        }).then(function (data, status, headers, config) {
+                            console.log("添加详情"+data.data);
+                            if(data.data.id>0){
+                                scope.descid=data.data.id;
+                                scope.item=data.data;
+                                scope.cancel();
+                            }
+                        });
+                    }
+
                 }
                 scope.cancel=function(){
                     scope.text="";

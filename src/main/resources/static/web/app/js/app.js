@@ -29,6 +29,7 @@
             'lvzhiyuan.farm',
             'lvzhiyuan.farmItem',
             'lvzhiyuan.desc',
+            'lvzhiyuan.product',
             'app.pager'
         ]);
 })();

@@ -57,7 +57,7 @@ public class FarmInfo {
 
     @Override
     public String toString() {
-        return "PushiFarmInfo{" +
+        return "FarmInfo{" +
                 "id=" + id +
                 ", farmName='" + farmName + '\'' +
                 '}';
