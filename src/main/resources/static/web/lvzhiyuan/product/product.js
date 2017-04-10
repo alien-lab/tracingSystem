@@ -14,7 +14,7 @@
         });
     }]);
     product_module.controller("productlistController",["$rootScope","$http","$scope","productService","$uibModal","productinstance",function($rootScope,$http,$scope,productService,$uibModal,productinstance) {
-        $scope.pagetitle="朴实产品管理";
+        $scope.pagetitle="绿之源产品管理";
         $scope.product_data=[];
 
         function loaddata(index,size){
@@ -43,10 +43,17 @@
                backdrop:false
            });
            modalInstance.result.then(function (data) {
-               if(data.id>0){
-                   $scope.product_data.content.push(data);
+               //添加保存成功
+               if(data.result > 0) {
+                   var product = data.data;
+                   console.log("显示新增农场"+product.productName);
+                   $scope.product_data.content.push(product);
                }
-           });
+           }, function(flag) {
+               if(flag.indexOf("back") >= 0) {
+                   return false;
+               }
+           })
         }
         $scope.deleteProduct=function deleteProduct(id){
             console.log("id"+id);
@@ -92,6 +99,14 @@
                 size: "lg",
                 backdrop:false
 
+            });
+            modalInstance.result.then(function(data) {
+                if(data.result >0) {
+                }
+            }, function(flag) {
+                if(flag.indexOf("back") >= 0) {
+                    return false;
+                }
             });
         }
         $scope.selectall=function () {
@@ -188,25 +203,32 @@
         //添加产品默认值
         $scope.form={}
         farmService.getAllFarmsWithoutPage(function(data){
-            $scope.farm_data=data;
+            $scope.farm_data=data.data;
         });
-        $scope.save=function save(addform) {
-          console.log(addform);
-          // $scope.loading=true;
-          productService.addProduct($scope.form,function (data) {
-              console.log($scope.form);
-              console.log(data);
-              // $scope.loading=false;
-              if(data.id>0){
-                 $uibModalInstance.close(data);
-              }else{
-                  $scope.error={
-                      haserror:true,
-                      errormss:"添加失败，您可以再试一次！"
-                  }
-              }
-          });
-      }
+        $scope.save = function save(product) {
+            $scope.loading = true;
+            productService.addProduct({
+                productFlag: $scope.form.productFlag,
+                productName:$scope.form.productName,
+                productDesc:$scope.form.productDesc,
+                productPrice:$scope.form.productPrice,
+                farmid:$scope.form.farmid,
+                status:$scope.form.status
+            },function (data) {
+                $scope.loading=false;
+                console.log("wwww"+data.result);
+                if(data.result>0){
+                    $uibModalInstance.close(data);
+                }else{
+                    $scope.error = {
+                        haserror: true,
+                        errormsg: "添加失败，您可以再试一次！"
+                    }
+                }
+            });
+
+
+        }
       $scope.cancel=function cancel(flag){
           $uibModalInstance.dismiss('cancel');
       }
@@ -216,18 +238,28 @@
 
     product_module.controller("modifyProductController",["$scope","farmService","productService","$uibModalInstance","productinstance",function ($scope,farmService,productService,$uibModalInstance,productinstance) {
         $scope.pagetitle="更新产品信息";
+        $scope.productStatus=["预售","筹备","采摘","运输"];
         console.log("modifyProductController".$scope);
         $scope.form=productinstance.modify;
         console.log($scope.form);
         $scope.form.advoption=true;
         farmService.getAllFarmsWithoutPage(function(data){
-            $scope.farm_data=data;
+            $scope.farm_data=data.data;
         });
         $scope.save=function save(updateform){
             $scope.loading=true;
-            productService.updateProduct($scope.form,function (data) {
-                console.log($scope.form);
-                console.log(data);
+            console.log("所传id"+$scope.form.id)
+            productService.updateProduct({
+                productId:$scope.form.id,
+                productFlag: $scope.form.productFlag,
+                productName:$scope.form.productName,
+                productDesc:$scope.form.productDesc,
+                productPrice:$scope.form.productPrice,
+                farmid:$scope.form.farmid,
+                status:$scope.form.status
+            },function (data) {
+                // console.log($scope.form);
+                // console.log(data);
                 $scope.loading = false;
                 if(data.result > 0) {
                     $uibModalInstance.close(data);
@@ -304,11 +336,11 @@
                 url:'/product/add',
                 method:'POST',
                 data:product
-            }).then(function(response){
+            }).then(function(response) {
                 console.log(response);
                 callback(response.data);
             },function (response) {
-
+                console.log("ghjuk"+response);
             });
         }
         this.deleteProduct=function (id,callback) {
@@ -354,6 +386,7 @@
         }
 
         this.loadItems=function(productid,callback){
+            console.log("产品id"+productid)
             $http({
                 url:"/product/items",
                 method:'POST',

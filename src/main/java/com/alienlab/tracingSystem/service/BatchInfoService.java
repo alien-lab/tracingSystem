@@ -2,6 +2,7 @@ package com.alienlab.tracingSystem.service;
 
 import com.alienlab.tracingSystem.Repository.BatchInfoRepository;
 import com.alienlab.tracingSystem.entity.BatchInfo;
+import com.alienlab.tracingSystem.entity.FarmInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

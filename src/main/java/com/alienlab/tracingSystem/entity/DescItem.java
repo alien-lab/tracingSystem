@@ -185,7 +185,7 @@ public class DescItem {
 
     @Override
     public String toString() {
-        return "PushiDescItem{" +
+        return "DescItem{" +
                 "id=" + id +
                 ", itemType='" + itemType + '\'' +
                 ", itemLabel='" + itemLabel + '\'' +

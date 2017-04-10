@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by master on 2017/4/6.
  */
@@ -15,6 +17,9 @@ import org.springframework.stereotype.Service;
 public class ProductInfoService {
     @Autowired
     private ProductInfoRepository productInfoRepository;
+    public List<ProductInfo> getProducts(){
+        return productInfoRepository.findAll();
+    }
     //1.展示所有产品的基本信息
     public Page<ProductInfo> getProductsPage(int index, int size){
         return productInfoRepository.findAll(new PageRequest(index,size));

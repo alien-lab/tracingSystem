@@ -29,8 +29,14 @@ public class BatchItemController {
     @Autowired
     private DescItemService descItemService;
 
-    @ApiOperation(value="添加批次的详情信息")
+    @ApiOperation(value="显示该批次的详情信息")
     @PostMapping(value="/items")
+    public List<BatchItem> getItems(@RequestParam Long batchid){
+        return batchItemService.getItems(batchid);
+    }
+
+    @ApiOperation(value="添加批次的详情信息")
+    @PostMapping(value="/items/add")
     public ResponseEntity addItem(@RequestParam Long descid, @RequestParam Long batchid){
         BatchInfo batchInfo= batchInfoService.getBatchInfoById(batchid);
         DescItem descItem=descItemService.getDescItemById(descid);
@@ -47,9 +53,5 @@ public class BatchItemController {
             return ResponseEntity.ok().body(success);
         }
     }
-    @ApiOperation(value="显示该批次的详情信息")
-    @GetMapping(value="/items/{batchid}")
-    public List<BatchItem> getItems(@PathVariable Long batchid){
-        return batchItemService.getItems(batchid);
-    }
+
 }

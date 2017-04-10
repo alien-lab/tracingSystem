@@ -1,6 +1,6 @@
 <style>
 </style>
-<h3>{{pagetitle}}</h3>
+<h3><em class=" fa fa-soccer-ball-o">&nbsp;&nbsp;&nbsp;</em>{{pagetitle}}</h3>
 <div class="row">
     <div class="col-md-8">
         <button class="btn btn-labeled btn-success" type="button" ng-click="addProduct()" tabindex="0">
@@ -16,12 +16,12 @@
             删除产品
         </button>
     </div>
-    <!--<div class="col-md-3 col-md-offset-1">-->
-        <!--<div class="input-group">-->
-            <!--<input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="srch_name" placeholder="输入产品名称查询" ng-model="searchKey " tabindex="0" aria-invalid="false">-->
-            <!--<div class="input-group-addon" ng-click="searchProduct(searchKey)" role="button" tabindex="0"><span class="fa fa-search"></span></div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="col-md-3 col-md-offset-1">
+        <div class="input-group">
+            <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="srch_name" placeholder="输入产品名称查询" ng-model="searchKey " tabindex="0" aria-invalid="false">
+            <div class="input-group-addon" ng-click="searchProduct(searchKey)" role="button" tabindex="0"><span class="fa fa-search"></span></div>
+        </div>
+    </div>
 </div>
 
 <div class="col-md-12">
@@ -35,6 +35,7 @@
                     <th>产品名称</th>
                     <th>产品价格</th>
                     <th>所属农场</th>
+                   <!-- <th>产品类型</th>-->
                     <th>产品状态</th>
                     <th>操作</th>
                 </tr>
@@ -48,11 +49,12 @@
                     <td>{{product.productName}}</td>
                     <td>{{product.productPrice}}</td>
                     <td>{{product.farmNameByFarmId.farmName}}</td>
+                  <!--  <td>{{product.typeNameByProductId.typeName}}</td>-->
                     <td>{{product.productStatus}}</td>
                     <td>
                         <button type="button" class="mb-sm btn btn-primary" ng-click="updateProduct(product)">更新</button>
                         <button type="button" class="mb-sm btn btn-danger" ng-click="deleteProduct(product.id)">删除</button>
-                        <button type="button" class="mb-sm btn btn-success" ng-click="toProductItem(product)">查看详情</button>
+                        <button type="button" class="mb-sm btn btn-success" ng-click="toProductItem(product)">详情管理</button>
                     </td>
 
                 </tr>

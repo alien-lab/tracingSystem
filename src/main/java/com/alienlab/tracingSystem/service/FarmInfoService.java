@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by master on 2017/3/26.
  */
@@ -14,6 +16,10 @@ import org.springframework.stereotype.Service;
 public class FarmInfoService {
     @Autowired
     private FarmInfoRepository farmInfoRepository;
+
+    public List<FarmInfo> getFarms(){
+        return farmInfoRepository.findAll();
+    }
     public Page<FarmInfo> getFarmsPage(int index, int size){
         return farmInfoRepository.findAll(new PageRequest(index,size));
     }
@@ -49,4 +55,5 @@ public class FarmInfoService {
     public FarmInfo getFarmInfoById(Long farmid){
         return farmInfoRepository.findOne(farmid);
     }
+
 }

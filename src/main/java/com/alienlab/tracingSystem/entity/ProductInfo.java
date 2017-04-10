@@ -23,6 +23,9 @@ public class ProductInfo {
     @ManyToOne
     @JoinColumn(name = "farm_info_id", referencedColumnName = "id")
     private FarmInfo farmNameByFarmId;
+   /* @ManyToOne
+    @JoinColumn(name = "product_type_id", referencedColumnName = "id")
+    private ProductType typeNameByProductId;*/
 
     public long getId() {
         return id;
@@ -102,6 +105,14 @@ public class ProductInfo {
     public void setFarmNameByFarmId(FarmInfo farmNameByFarmId) {
         this.farmNameByFarmId = farmNameByFarmId;
     }
+
+   /* public ProductType getTypeNameByProductId() {
+        return typeNameByProductId;
+    }
+
+    public void setTypeNameByProductId(ProductType typeNameByProductId) {
+        this.typeNameByProductId = typeNameByProductId;
+    }*/
 
     @Override
     public boolean equals(Object o) {

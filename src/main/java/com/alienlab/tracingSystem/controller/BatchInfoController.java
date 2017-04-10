@@ -36,10 +36,10 @@ public class BatchInfoController {
     }
     @ApiOperation(value="添加批次的基本信息")
     @PostMapping(value = "/addBatch")
-    public ResponseEntity addBatch(@RequestParam Long id, @RequestParam String batchString , @RequestParam String batchName,
-                                   @RequestParam Integer batchNoStart, @RequestParam Integer batchNoEnd,
-                                   @RequestParam long batchTotalCount,  @RequestParam String batchStatus){
-        ProductInfo productInfo=productInfoService.getProductInfoById(id);
+    public ResponseEntity addBatch(@RequestParam Long productid, @RequestParam String batchString ,
+                                   @RequestParam String batchName, @RequestParam Integer batchNoStart,
+                                   @RequestParam Integer batchNoEnd, @RequestParam String batchStatus){
+        ProductInfo productInfo=productInfoService.getProductInfoById(productid);
         BatchInfo batchInfo=new BatchInfo();
         batchInfo.setProductByProductId(productInfo);
         batchInfo.setBatchString(batchString);

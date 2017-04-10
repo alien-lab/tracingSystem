@@ -30,6 +30,8 @@
             'lvzhiyuan.farmItem',
             'lvzhiyuan.desc',
             'lvzhiyuan.product',
+            'lvzhiyuan.batch',
+            'lvzhiyuan.batchQuery',
             'app.pager'
         ]);
 })();

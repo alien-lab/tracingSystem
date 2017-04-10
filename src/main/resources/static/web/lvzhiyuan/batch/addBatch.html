@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{pagetitle}}</h3>
+</div>
+<div class="modal-body">
+    <form role="form" name="addBatchform" novalidate="novalidate">
+        <div class="form-group col-md-12">
+            <label>选择产品</label>
+            <select class="dropdown form-control" ng-model="form.productid">
+                <option ng-repeat="product in products" value="{{product.id}}">{{product.productName}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-12">
+            <label>批次号</label>
+            <input type="text" class="form-control" placeholder="请输入批次号" ng-model="form.batchString" required />
+        </div>
+        <div class="form-group col-md-12">
+            <label>批次名称</label>
+            <input name="batchName" id="input-name" type="text" placeholder="请输入批次名称" class="form-control" ng-model="form.batchName" required />
+        </div>
+
+        <div class="form-group col-md-12">
+            <label>批次关联订单号开始号码</label>
+            <input name="batchNoStart" id="input-nostart" type="number" placeholder="请输入批次关联订单号开始号码" class="form-control" ng-model="form.batchNoStart" required />
+        </div>
+        <div class="form-group col-md-12">
+            <label>批次关联订单号结束号码</label>
+            <input name="batchNoEnd" id="input-noend" type="number" placeholder="请输入批次关联订单号结束号码" class="form-control" ng-model="form.batchNoEnd" required />
+        </div>
+
+        <div class="form-group col-md-12">
+            <label>批次订单总量</label>
+            <input name="batchTotalCount" id="input-totalcount" type="number" placeholder="请输入批次订单总量" class="form-control" ng-model="form.batchNoEnd-form.batchNoStart+1" required />
+        </div>
+
+        <div class="form-group col-md-12">
+            <label>批次状态</label>
+            <select class="dropdown form-control" ng-model="form.batchStatus">
+                <option ng-repeat="status in batchStatus" value="{{status}}">{{status}}</option>
+            </select>
+        </div>
+
+        <div style="clear:both;"></div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="mb-sm btn btn-primary" type="submit" ng-disabled="addBatchform.$invalid" ng-click="save(addBatchform)">保存</button>
+    <button class="mb-sm btn btn-danger" type="button" ng-click="cancel()">取消</button>
+</div>

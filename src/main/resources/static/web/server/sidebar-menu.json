@@ -16,17 +16,12 @@
   {
     "text": "批次管理",
     "sref": "lvzhiyuan.batch",
-    "icon": "fa fa-reorder"
+    "icon": "fa fa-th-large"
   },
   {
     "text": "批次查询",
     "sref": "lvzhiyuan.batchQuery",
-    "icon": "fa fa-reorder"
-  },
-  {
-    "text": "详情管理",
-    "sref": "lvzhiyuan.desc",
-    "icon": "fa fa-reorder"
+    "icon": "fa fa-search-minus"
   }
 
 ]

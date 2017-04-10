@@ -7,12 +7,13 @@ import com.alienlab.tracingSystem.entity.FarmInfo;
 import com.alienlab.tracingSystem.service.FarmInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by master on 2017/3/26.
@@ -25,7 +26,22 @@ public class FarmInfoController {
     private FarmInfoService farmInfoService;
     @Autowired
     private FarmInfoRepository farmInfoRepository;
-    @ApiOperation(value="获取所有农场信息")
+    @GetMapping(value = "/farms")
+    public ResponseEntity getFarms(){
+        List<FarmInfo> result=farmInfoService.getFarms();
+        System.out.println("结果"+result);
+        if(result==null){
+            ExecResult er= new ExecResult(false,"获取所有农场信息出现异常");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(er);
+        }
+        else{
+            ExecResult er = new ExecResult();
+            er.setResult(true);
+            er.setData((JSON) com.alibaba.fastjson.JSON.toJSON(result));
+            return ResponseEntity.ok().body(er);
+        }
+    }
+    @ApiOperation(value="获取所有农场信息（带页码的）")
     @RequestMapping(value="/{index}-{size}", method=RequestMethod.GET)
     public Page<FarmInfo> allfarms(@PathVariable("index") String index, @PathVariable("size") String size){
         return farmInfoService.getFarmsPage(Integer.parseInt(index),Integer.parseInt(size));

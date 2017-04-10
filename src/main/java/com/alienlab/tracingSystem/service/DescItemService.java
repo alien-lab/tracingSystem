@@ -1,7 +1,9 @@
 package com.alienlab.tracingSystem.service;
 
+import com.alienlab.tracingSystem.Repository.BatchItemRepository;
 import com.alienlab.tracingSystem.Repository.DescItemRepository;
 import com.alienlab.tracingSystem.Repository.FarmItemRepository;
+import com.alienlab.tracingSystem.Repository.ProductItemRepository;
 import com.alienlab.tracingSystem.entity.DescItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,10 @@ public class DescItemService {
     private DescItemRepository descItemRepository;
     @Autowired
     private FarmItemRepository farmItemRepository;
+    @Autowired
+    private ProductItemRepository productItemRepository;
+    @Autowired
+    private BatchItemRepository batchItemRepository;
     //通过详情的id找到该条对应的详情
     public DescItem getDescItemById(Long id){
         DescItem item=descItemRepository.findOne(id);
@@ -29,9 +35,9 @@ public class DescItemService {
     public boolean deleteDesc(long itemid){
         try {
             DescItem item = descItemRepository.findOne(itemid);
-          //  batchItemRepository.deleteItemByDetailContentId(item);
+            batchItemRepository.deleteItemByDetailContentId(item);
             farmItemRepository.deleteByDescItemByDetailcontentId(item);
-        //    productItemRepository.deleteByDescItemByDetailcontentId(item);
+            productItemRepository.deleteByDescItemByDetailcontentId(item);
             descItemRepository.delete(itemid);
             return true;
         }catch(Exception e){

@@ -202,7 +202,6 @@
    farm_module.controller("addFarmController",["$scope","farmService","$uibModalInstance","$rootScope",function($scope,farmService,$uibModalInstance,$rootScope){
         $scope.ModTitle = "添加农场";
         $scope.save = function save(farm) {
-            console.log("ha"+$scope.form.farmName)
             $scope.loading = true;
             farmService.addFarm({
                 farmName:$scope.form.farmName
@@ -218,11 +217,7 @@
                     }
                 }
             });
-            /*farmService.addFarm({
-                farmName:$scope.form.farmName
-            },function (result) {
-                console.log(result);
-            });*/
+
 
         }
         $scope.cancel = function cancel(flag){
@@ -311,7 +306,16 @@
                 callback(response.data);
             });
         }
-
+        //在添加产品时要获取所有农场的名称
+        this.getAllFarmsWithoutPage=function(callback){
+            $http({
+                url:'/farmctrl/farms',
+                method:'GET'
+            }).then(function(data){
+                console.log("dddd"+data.data);
+                callback(data.data);
+            });
+        }
 
     }]);
 })();

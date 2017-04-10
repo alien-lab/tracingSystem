@@ -28,7 +28,7 @@ public class ProductItemController {
     @Autowired
     private DescItemService descItemService;
     @ApiOperation(value="添加产品详情信息")
-    @PostMapping(value="/items")
+    @PostMapping(value="/items/add")
     public ResponseEntity addItem(@RequestParam Long descid, @RequestParam Long pid){
         ProductInfo productInfo= productInfoService.getProductInfoById(pid);
         DescItem descItem=descItemService.getDescItemById(descid);
@@ -46,8 +46,8 @@ public class ProductItemController {
         }
     }
     @ApiOperation(value="显示该产品的详情信息")
-    @GetMapping(value="/items/{pid}")
-    public List<ProductItem> getItems(@PathVariable Long pid){
+    @PostMapping(value="/items")
+    public List<ProductItem> getItems(@RequestParam Long pid){
         return productItemService.getItems(pid);
     }
 }
