@@ -14,7 +14,7 @@
         });
     }]);
     batch_module.controller("getbatchController",["$scope","getBatchService","batchDescinstance","$uibModal",function ($scope,getBatchService,batchDescinstance,$uibModal) {
-        $scope.pagetitle="查询批次";
+        $scope.pagetitle="绿之源批次查询";
         $scope.infostates = false;
         //批次基本信息
         $scope.getBatch=function getBatch(batchString){
@@ -30,37 +30,6 @@
                  console.log(data);
             });
         }
-        //批次详情
-        // $scope.getBatchDesc=function (batchString) {
-        //     getBatchService.getBatchDesc(batchString,function (data) {
-        //         $scope.batch_descs=data;
-        //         console.log(data);
-        //     })
-        // }
-        //批次对应产品详情
-        // $scope.getProductDesc=function (batchString) {
-        //     getBatchService.getProductDesc(batchString,function (data) {
-        //         $scope.product_descs=data;
-        //         console.log(data);
-        //     })
-        // }
-        //批次对应农场详情
-        // $scope.getFarmDesc=function (batchString) {
-        //     getBatchService.getFarmDesc(batchString,function (data) {
-        //         $scope.farm_descs=data;
-        //         console.log(data);
-        //     })
-        // }
-        //产品信息模态框
-        $scope.toProductinfo=function(batchinfo){
-            batchDescinstance.currentBatchInfo=batchinfo;
-            var ProductinfoModal = $uibModal.open({
-                animation:false,
-                templateUrl: 'lvzhiyuan/batch/batchProductinfo.html',
-                controller:'productDescModalController',
-                backdrop:true
-            });
-        }
         //批次信息模态框
         $scope.toBatchinfo=function(batchinfo){
             batchDescinstance.currentBatchInfo=batchinfo;
@@ -71,6 +40,18 @@
                 backdrop:true
             });
         }
+
+        //产品信息模态框
+        $scope.toProductinfo=function(batchinfo){
+            batchDescinstance.currentBatchInfo=batchinfo;
+            var ProductinfoModal = $uibModal.open({
+                animation:false,
+                templateUrl: 'lvzhiyuan/batch/batchProductinfo.html',
+                controller:'productDescModalController',
+                backdrop:true
+            });
+        }
+
         //农场信息模态框
         $scope.toFarminfo=function(batchinfo){
             batchDescinstance.currentBatchInfo=batchinfo;
@@ -79,25 +60,6 @@
                 templateUrl: 'lvzhiyuan/batch/batchFarminfo.html',
                 controller:'farmDescModalController',
                 backdrop:true
-            });
-        }
-    }]);
-    batch_module.controller("productDescModalController",["$scope","batchDescinstance","getBatchService","$uibModalInstance",function ($scope,batchDescinstance,getBatchService,$uibModalInstance) {
-        $scope.title="产品详情";
-        $scope.batchinfo=batchDescinstance.currentBatchInfo;
-        $scope.cancel = function cancel(flag){
-            $uibModalInstance.dismiss('cancel');
-        }
-        loaditems($scope.batchinfo);
-        function loaditems(batchinfo){
-            //加载该产品的详情
-            getBatchService.getProductDesc(batchinfo,function(items){
-                console.log("product load items",items);
-                $scope.items=[];
-                for(var i=0;i<items.length;i++){
-                    $scope.items.push(items[i]);
-                }
-                console.log(items);
             });
         }
     }]);
@@ -112,6 +74,26 @@
             //加载该批次的详情
             getBatchService.getBatchDesc(batchinfo,function(items){
                 console.log("batch load items",items);
+                $scope.items=[];
+                for(var i=0;i<items.length;i++){
+                    $scope.items.push(items[i]);
+                }
+                console.log(items);
+            });
+        }
+    }]);
+
+    batch_module.controller("productDescModalController",["$scope","batchDescinstance","getBatchService","$uibModalInstance",function ($scope,batchDescinstance,getBatchService,$uibModalInstance) {
+        $scope.title="产品详情";
+        $scope.batchinfo=batchDescinstance.currentBatchInfo;
+        $scope.cancel = function cancel(flag){
+            $uibModalInstance.dismiss('cancel');
+        }
+        loaditems($scope.batchinfo);
+        function loaditems(batchinfo){
+            //加载该产品的详情
+            getBatchService.getProductDesc(batchinfo,function(items){
+                console.log("product load items",items);
                 $scope.items=[];
                 for(var i=0;i<items.length;i++){
                     $scope.items.push(items[i]);
@@ -162,7 +144,7 @@
                      batchString:batchinfo
                  }
              }).then(function (data) {
-                 console.log(data.data.data);
+                 console.log("ahhaah"+data.data.data);
                  callback(data.data.data);
              });
          }
@@ -176,6 +158,8 @@
                 }
             }).then(function (data) {
                 console.log(data.data.data);
+                console.log("ahhaah"+data.data);
+                console.log("ahhaah"+data);
                 callback(data.data.data);
             });
         }

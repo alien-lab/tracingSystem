@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BatchInfoRepository extends JpaRepository<BatchInfo,Long> {
+    public BatchInfo findBatchInfoByBatchString(String batchString);
 }
