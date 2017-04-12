@@ -16,5 +16,11 @@ public class UserService {
     public User findUserByLoginname(String loginname){
         return userRepository.findUserByLoginname(loginname);
     }
-
+    public User addUser(User user){
+        if(user!=null){
+            return userRepository.save(user);
+        }else{
+            return null;
+        }
+    }
 }

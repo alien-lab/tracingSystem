@@ -1,0 +1,32 @@
+<div ng-repeat="item in items" class="panel standard" ng-class="{'panel-primary':(item.itemStatus==1||item.itemStatus=='1'),'panel-warning':!(item.itemStatus==1||item.itemStatus=='1')}">
+    <div class="panel-heading" ng-if="!(item.itemStatus==1||item.itemStatus=='1')" style="position:relative">
+        未发布
+        <div ng-if="!(item.itemStatus==1||item.itemStatus=='1')" class="btn btn-sm btn-success" style="position:absolute;right:5px;bottom:5px;" ng-click="publish(item)">发布</div>
+    </div>
+    <div class="panel-heading" ng-if="(item.itemStatus==1||item.itemStatus=='1')" style="position:relative">
+        已发布
+        <div ng-if="(item.itemStatus==1||item.itemStatus=='1')" class="btn btn-sm btn-warning" style="position:absolute;right:5px;bottom:5px;" ng-click="unpublish(item)">取消发布</div>
+    </div>
+    <div class="panel-body">
+        <div ng-if="item.itemType=='text'">
+            <p ng-if="!item.itemLink">
+                {{item.itemContent}}
+            </p>
+            <p ng-if="item.itemLink">
+                <a href="{{item.itemLink}}">{{item.itemContent}}</a>
+            </p>
+            <p class="text-right">
+                {{item.itemTime|date:"yyyy-MM-dd hh:mm:ss"}}
+            </p>
+        </div>
+        <div ng-if="item.itemType=='image'">
+            <a ng-if="item.itemLink" href="item.itemLink">
+                <img ng-src="{{item.itemFile}}" class="descitem" style="width:100%;"/>
+            </a>
+            <img ng-if="!item.itemLink" ng-src="{{item.itemFile}}" style="width:100%;" class="descitem"/>
+        </div>
+    </div>
+    <div class="panel-footer" ng-if="!(item.itemStatus==1||item.itemStatus=='1')">
+        <div  class="btn btn-sm btn-danger" ng-click="deleteDesc(item)">删除</div>
+    </div>
+</div>

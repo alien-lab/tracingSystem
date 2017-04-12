@@ -1,0 +1,53 @@
+
+<div class="panel panel-info" style="position:relative;">
+    <div class="panel-body">
+        <input type="file" imagepreview fileread="image.file"
+               id="imageloader" style="display:none;"/>
+        <div class="col-md-12" ng-if="type=='unknow'">
+            <div class="col-md-5 col-sm-12">
+                <img class="img-rounded thumb64 center-block" src="app/img/addimage.jpg" onclick="imageloader.click()"/>
+            </div>
+            <div class="col-md-2 center-block align-middle" style="font-size: 20px;">
+                OR
+            </div>
+            <div class="col-md-5 col-sm-12" ng-click="chooseText()">
+                <img class="img-rounded thumb64 center-block" src="app/img/addtext.jpg"/>
+            </div>
+        </div>
+        <!--如果选择图片，预览图片-->
+        <div class="col-md-12" ng-if="image!=null">
+            <img ng-src="{{image.file}}" class="img-rounded" style="max-width:256px;" onclick="imageloader.click()"/>
+        </div>
+
+
+        <div class="col-md-12" ng-if="type=='text'">
+            <form class="modal-form">
+                <div class="form-group-sm">
+                    <label>文字内容：</label>
+                    <textarea class="form-control note-editor note-editor-margin"
+                              rows="5" name="content" ng-model="$parent.text"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-12" ng-if="type=='image'||type=='text'">
+            <form class="modal-form">
+                <div class="form-group-sm">
+                    <label>显示标题：</label>
+                    <input type="text" class="form-control" placeholder="输入内容标题" ng-model="$parent.label"/>
+                </div>
+                <div class="form-group-sm">
+                    <label>外部链接：</label>
+                    <input class="form-control" type="text" placeholder="输入内容需链接到的外部URL" ng-model="$parent.link"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel-footer" ng-if="type=='image'||type=='text'">
+        <button class="btn btn-success btn-sm btn-group-sm" ng-click="save()">保存</button>
+        <button class="btn btn-danger btn-sm btn-group-sm" ng-click="cancel()">取消</button>
+    </div>
+    <div style="width:100%;height:100%;position:absolute;left:0;
+                    top:0;background-color:rgba(0,0,0,0.5); color:#fff;text-align: center;"
+         ng-if="loading">数据保存中...</div>
+</div>

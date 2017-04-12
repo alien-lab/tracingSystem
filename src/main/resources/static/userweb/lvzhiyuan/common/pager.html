@@ -1,0 +1,5 @@
+<ul class="pagination pagination-sm">
+    <li ng-disabled="pagerData.first" ng-click="loaddata({index: pagerData.number-1,size:pagerData.size})"><a href="javascript:void(0)">上一页</a></li>
+    <li><a href="javascript:void(0)">{{pagerData.number+1}}/{{pagerData.totalPages}}</a></li>
+    <li ng-disabled="pagerData.last" ng-click="loaddata({index: pagerData.number+1,size:pagerData.size})"><a href="javascript:void(0)">下一页</a></li>
+</ul>

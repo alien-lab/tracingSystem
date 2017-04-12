@@ -302,6 +302,7 @@
                 return;
             }
             // 如果用户不存在
+            console.log("ahhaa"+$rootScope.user);
             if(!$rootScope.user){
                 console.log("1231");
                 event.preventDefault();// 取消默认跳转行为
@@ -430,6 +431,7 @@
                        var favoriteCookie = $cookieStore.get('user').account;
                         console.log("cook"+favoriteCookie);
                     }else{
+                        console.log("错误反馈"+result.errormsg)
                         $scope.login.errormsg=result.errormsg;
                     }
                 });
@@ -443,9 +445,10 @@
     'use strict';
     angular.module("app.core").service("registerService",["$http",function($http){
         this.doregister=function(user,callback){
-            console.log(user);
+            console.log(user.loginname);
+            console.log(user.password);
             $http({
-                url:"/doregister",
+                url:"/user/doregister",
                 method:"POST",
                 data:user
             }).then(function(result){
@@ -465,7 +468,7 @@
         this.dologin=function(user,callback){
             console.log(user.loginname+user.password);
             $http({
-                url:"/dologin",
+                url:"/user/dologin",
                 method:"POST",
                 data:user
             }).then(function(result){

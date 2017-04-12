@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by master on 2017/3/26.
  */
 @Entity
-@Table(name = "tb_user",schema = "trancingsystem",catalog = "")
+@Table(name = "tb_admin",schema = "trancingsystem",catalog = "")
 public class User {
     @ApiModelProperty(value="用户id")
     private long userid;
