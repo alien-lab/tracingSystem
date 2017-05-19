@@ -14,12 +14,19 @@ public class ProductInfo {
     @Column(name = "id")
     private long id;
     private String productName;
+    private String productLogo;
     private double productPrice;
     private String productFlag;
+    private String productTitle;
+    private String productContent;
     private String productDesc;
     private byte[] productImage;
     private String productImageContentType;
     private String productStatus;
+    private long nice;
+    private long bad;
+    private long collection;
+    private long looks;
     @ManyToOne
     @JoinColumn(name = "farm_info_id", referencedColumnName = "id")
     private FarmInfo farmNameByFarmId;
@@ -44,6 +51,16 @@ public class ProductInfo {
         this.productName = productName;
     }
     @Basic
+    @Column(name = "product_logo")
+    public String getProductLogo() {
+        return productLogo;
+    }
+
+    public void setProductLogo(String productLogo) {
+        this.productLogo = productLogo;
+    }
+
+    @Basic
     @Column(name = "product_price")
     public double getProductPrice() {
         return productPrice;
@@ -61,6 +78,16 @@ public class ProductInfo {
     public void setProductFlag(String productFlag) {
         this.productFlag = productFlag;
     }
+    @Basic
+    @Column(name = "product_title")
+    public String getProductTitle() {
+        return productTitle;
+    }
+
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
+    }
+
     @Basic
     @Column(name = "product_desc")
     public String getProductDesc() {
@@ -105,8 +132,52 @@ public class ProductInfo {
     public void setFarmNameByFarmId(FarmInfo farmNameByFarmId) {
         this.farmNameByFarmId = farmNameByFarmId;
     }
+    @Basic
+    @Column(name = "product_content")
+    public String getProductContent() {
+        return productContent;
+    }
 
-   /* public ProductType getTypeNameByProductId() {
+    public void setProductContent(String productContent) {
+        this.productContent = productContent;
+    }
+    @Basic
+    @Column(name = "product_nice")
+    public long getNice() {
+        return nice;
+    }
+
+    public void setNice(long nice) {
+        this.nice = nice;
+    }
+    @Basic
+    @Column(name = "product_bad")
+    public long getBad() {
+        return bad;
+    }
+
+    public void setBad(long bad) {
+        this.bad = bad;
+    }
+    @Basic
+    @Column(name = "collection")
+    public long getCollection() {
+        return collection;
+    }
+
+    public void setCollection(long collection) {
+        this.collection = collection;
+    }
+    @Basic
+    @Column(name = "looks")
+    public long getLooks() {
+        return looks;
+    }
+
+    public void setLooks(long looks) {
+        this.looks = looks;
+    }
+    /* public ProductType getTypeNameByProductId() {
         return typeNameByProductId;
     }
 

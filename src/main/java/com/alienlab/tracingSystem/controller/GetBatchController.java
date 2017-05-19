@@ -68,7 +68,7 @@ public class GetBatchController {
             return ResponseEntity.ok().body(er);
         }
     }
-    @ApiOperation(value="获取该批次对应产品的详情")
+    @ApiOperation(value="获取该批次对应农场的详情")
     @GetMapping(value = "/farmDesc/{batchString}")
     public ResponseEntity getFarmDesc(@PathVariable("batchString") String batchString){
         List results=getBatchService.findFarmDescByBatchString(batchString);

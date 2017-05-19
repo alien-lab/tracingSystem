@@ -231,7 +231,7 @@
 
     function appRun($rootScope, $state, $stateParams, $window, $templateCache, Colors,$cookieStore) {
         console.log("app.run");
-        console.log($cookieStore.get('user'));
+        console.log($cookieStore.get('admin'));
         $rootScope.rolepurview="ALL";
         // Set reference to access them from any scope
         $rootScope.$state = $state;
@@ -289,7 +289,7 @@
         //登录拦截器，跳转登录
         $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
             //如果有cookies
-            if($cookieStore.get('user')!= undefined){
+            if($cookieStore.get('admin')!= undefined){
                 return;
             }
             // 如果是进入登录界面则允许
@@ -419,16 +419,16 @@
                     password:$scope.login.password
                 },function(result){
                     console.log(result);
-                    if(result != null ){//登录成功
+                    if(result.result >0 >0 ){//登录成功
                         console.log("登陆成功")
                        $rootScope.user=result.data;
                        $state.go("lvzhiyuan.farm");//登录成功跳转到主页
                         // Put cookie
-                        $cookieStore.put("user",
+                        $cookieStore.put("admin",
                             {account: result.loginname,password:  result.password},{
                                 expires: new Date(new Date().getTime() + 60000)
                             });
-                       var favoriteCookie = $cookieStore.get('user').account;
+                       var favoriteCookie = $cookieStore.get('admin').account;
                         console.log("cook"+favoriteCookie);
                     }else{
                         console.log("错误反馈"+result.errormsg)
@@ -441,7 +441,7 @@
 })();
 /*用户注册服务*/
 
-(function() {
+/*(function() {
     'use strict';
     angular.module("app.core").service("registerService",["$http",function($http){
         this.doregister=function(user,callback){
@@ -456,7 +456,7 @@
             })
         }
     }]);
-})();
+})();*/
 
 
   /*新增登录服务*/
@@ -465,12 +465,12 @@
     'use strict';
     angular.module("app.core").service("loginService",["$http",function($http){
         console.log("进入loginservice");
-        this.dologin=function(user,callback){
-            console.log(user.loginname+user.password);
+        this.dologin=function(admin,callback){
+            console.log(admin.loginname+admin.password);
             $http({
-                url:"/user/dologin",
+                url:"/admin/dologin",
                 method:"POST",
-                data:user
+                data:admin
             }).then(function(result){
                 callback(result.data);
             })

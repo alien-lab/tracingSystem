@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>绿之源订单信息</title>
+    <style>
+        .btn-default:hover{
+            background-color:#98fb98;
+        }
+    </style>
+    <style type="text/css">
+        #temp2{height:301px;width:709px;}
+        #temp2 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+        #temp2 .JQ-content-box .JQ-slide-content{position:absolute}
+        #temp2 .JQ-content-box li{width:549px;height:289px;float:left;}
+        #temp2 .JQ-content-box img{border-radius:8px;}
+        #temp2 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+        #temp2 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li img{width:127px;height:68px;display:block;border-radius:5px;}
+        /* #temp3{height:320px;width:710px;}
+         #temp3 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+         #temp3 .JQ-content-box .JQ-slide-content  li{position:absolute;top:0;left:0}
+         #temp3 .JQ-content-box img{width:549px;height:289px;display:block;margin-top:15px;border-radius:8px;}
+         #temp3 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+         #temp3 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li img{width:127px;height:63px;
+             margin-top: 26px;}*/
+    </style>
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css}" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
+    <link rel="stylesheet" th:href="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sheetstyle.css}"/>
+    <link th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="top">
+    <div id="top_main">
+        <div id="hello"> <span>您好，欢迎来到绿之源鲜果订单追溯系统首页！ </span> </div>
+        <div class="topright" style="float:right;">
+            <ul>
+                <li>
+                    <div class="cun"><a href="/login">[登陆]</a> </div>
+                </li>
+                <li>
+                    <div class="cun"><a href="/register">[免费注册]</a> </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation" style="background-color: transparent;border-color:#b0b0b0;margin-bottom:0px;">
+        <div class="container-fluid" >
+            <div class="title" style="margin-left:150px;margin-top:10px;float:left;">
+                <img th:src="@{/img/lvzhiyuanlogo.png}" style="height:35px;width:45px;"/>
+                <img th:src="@{/img/lvzhiyuan.png}"/>
+            </div>
+            <form action="#" th:action="@{/getItem}"  method="get">
+                <div class="row" style="background-color: #ffffff;">
+                    <div class="col-lg-5 col-md-offset-1" style="margin-top: 10px;margin-bottom: 10px;padding:0;">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入订单号" name="batchString" style="height:40px;"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="height:40px;background-color:#B3EE3A;"><i class="fa fa-search"></i> 搜 一 下 </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div id="menu2" class="menu">
+        <ul>
+            <li style="margin-left: 123px;"><a href="/index" >首　　页</a></li>
+            <li><a href="login">绿之源农场</a></li>
+            <li><a href="login">绿之源鲜果</a></li>
+            <!--<li><a href="/">绿之源批次</a></li>-->
+            <li><a href="login">所关注农场</a></li>
+            <li><a href="login">所收藏鲜果</a></li>
+        </ul>
+        <!-- <ul class="nav navbar-nav navbar-right" >
+             <li><img alt=" " th:src="@{/img/lvlogo.png}" width="40px" height="40px" /></li>
+             <li><a href="/person"  style="color:#F2F4F5;margin-right:120px;
+             margin-left:10px; margin-top: 10px;">用户</a></li>
+
+         </ul>-->
+        <div class="cls"></div>
+    </div>
+</div>
+<div id="center" style="margin-top: 102px;">
+    <div class="container">
+        <div class="center_top_farm" >
+            <div class="panel" style="border-color: #F0F0F0;margin-top: 30px;">
+                <div class="panel-heading" style="background-color: rgba(175, 65, 247, 0.38)">
+                    <h3 class="panel-title" th:text="${batchString}+'批次的基本信息'"></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="table-ext-1" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>批次编号</th>
+                                <th>订单编号</th>
+                                <th>批次名称</th>
+                                <th>批次状态</th>
+                                <th>订单总数</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="warning">
+                                <td th:text="${batchInfo.batchString}"></td>
+                                <td th:text="${orderNumber}"></td>
+                                <td th:text="${batchInfo.batchName}"></td>
+                                <td th:text="${batchInfo.batchStatus}"></td>
+                                <td th:text="${batchInfo.batchTotalCount}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="text-align: center" >
+                <div class="col-lg-4 col-md-6 col-sm-12"><!-- START date widget-->
+                    <div class="panel widget bg-purple" style="margin-bottom:0px;">
+                        <button class="row row-table"  style="width: 358px;height:120px;margin: 0;background-color:#66b6ba;border-radius: 5px;" data-toggle="modal" data-target="#myModal">
+                            <div class="col-xs-4 text-center bg-purple-dark pv-lg" style="height: 118px;background-color: #63a7ab;color: #fff !important;border-radius: 5px;" >
+                                <span class="glyphicon glyphicon-send" style="margin-top: 10px;font-size: 35px;"></span>
+                                <br/>
+                                <div class="h3 mt0" style="margin: 0;">批次</div>
+                            </div>
+                            <div class="col-xs-8 pv-lg" >
+                                <div  class="h4 mt0" style="color: #fff;">查看</div>
+                                <div  class="h3 mt0" style="color: #fff;">批次详情</div>
+                            </div>
+                        </button>
+                        <div class="modal fade" id="myModal" tabindex="-4" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #66b6ba;">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h3 class="modal-title" id="myModalLabel" style="font-size: 20px;">
+                                            <span class="glyphicon glyphicon-send" style="font-size: 20px;"></span>&nbsp;&nbsp;批次详情
+                                        </h3>
+
+                                    </div>
+                                    <div  class="modal-body" style="margin-left:20px;margin-right:20px;" th:each="batchItem:${batchItems}">
+                                        <div  th:if="${batchItem.itemType eq 'text'} ">
+                                            <p th:text="${batchItem.itemContent}" ></p>
+                                        </div>
+                                        <div th:if="${batchItem.itemType  eq 'image'}">
+                                            <img th:if="${not #lists.isEmpty(batchItem.itemLink)}" th:src="@{${batchItem.itemFile}}"  style="width:100%;" class="descitem"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12"><!-- START date widget-->
+                    <div class="panel widget bg-purple" style="margin-bottom:0px;">
+                        <button class="row row-table"  style="width: 358px;height:120px;margin: 0;background-color:#7849da;border-radius: 5px;" data-toggle="modal" data-target="#productModal">
+                            <div class="col-xs-4 text-center bg-purple-dark pv-lg" style="height: 118px;background-color: #564aa3;color: #fff !important;border-radius: 5px;" >
+                                <span class="glyphicon glyphicon-shopping-cart" style="margin-top: 10px;font-size: 35px;"></span>
+                                <br/>
+                                <div class="h3 mt0" style="margin: 0;">产品</div>
+                            </div>
+                            <div class="col-xs-8 pv-lg" >
+                                <div  class="h4 mt0" style="color: #fff;">查看</div>
+                                <div  class="h3 mt0" style="color: #fff;">产品详情</div>
+                            </div>
+                        </button>
+                        <div class="modal fade" id="productModal" tabindex="-4" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #7849da;">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h3 class="modal-title" id="productModalLabel" style="font-size: 20px;">
+                                            <span class="glyphicon glyphicon-shopping-cart" style="font-size: 20px;"></span>&nbsp;&nbsp;产品详情
+                                        </h3>
+
+                                    </div>
+                                    <div  class="modal-body" style="margin-left:20px;margin-right:20px;" th:each="productItem:${productItems}">
+                                        <div  th:class="${productItem.itemType}? 'text'">
+                                            <p th:text="${productItem.itemContent}" ></p>
+                                        </div>
+                                        <div th:class="${productItem.itemType}? 'image'">
+                                            <img th:if="${not #lists.isEmpty(productItem.itemLink)}" th:src="@{${productItem.itemFile}}" style="width:100%;" class="descitem"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+                <div class="col-lg-4 col-md-6 col-sm-12"><!-- START date widget-->
+                    <div class="panel widget bg-purple" style="margin-bottom:0px;">
+                        <button class="row row-table"  style="width: 358px;height:120px;margin: 0;background-color:#73dc89;border-radius: 5px;" data-toggle="modal" data-target="#farmModal">
+                            <div class="col-xs-4 text-center bg-purple-dark pv-lg" style="height: 118px;background-color: #61c77f;color: #fff !important;border-radius: 5px;" >
+                                <span class="glyphicon glyphicon-gift" style="margin-top: 10px;font-size: 35px;"></span>
+                                <br/>
+                                <div class="h3 mt0" style="margin: 0;">农场</div>
+                            </div>
+                            <div class="col-xs-8 pv-lg" >
+                                <div  class="h4 mt0" style="color: #fff;">查看</div>
+                                <div  class="h3 mt0" style="color: #fff;">农场详情</div>
+                            </div>
+                        </button>
+                        <div class="modal fade" id="farmModal" tabindex="-4" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #73dc89;">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h3 class="modal-title" id="farmModalLabel" style="font-size: 20px;">
+                                            <span class="glyphicon glyphicon-gift" style="font-size: 20px;"></span>&nbsp;&nbsp;农场详情
+                                        </h3>
+
+                                    </div>
+                                    <div  class="modal-body" style="margin-left:20px;margin-right:20px;" th:each="farmItem:${farmItems}">
+                                        <div  th:class="${farmItem.itemType}? 'text'">
+                                            <p th:text="${farmItem.itemContent}" style="text-indent: 2.3em;font-size: 15px;letter-spacing: 2px;"></p>
+                                        </div>
+                                        <div th:class="${farmItem.itemType}? 'image'">
+                                            <img th:if="${not #lists.isEmpty(farmItem.itemLink)}" th:src="@{${farmItem.itemFile}}"  style="width:100%;" class="descitem"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bottom" style="margin-top: 220px;border-top: 1px solid #A9A9A9;">
+    <span style="margin-left: 650px;position: relative;color:#A9A9A9; margin-top:10px;"> 版权归Alienlab工作室所有@Alienlab</span>
+</div>
+<!--<script th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+<script th:src="@{http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js}"></script>
+<script th:src="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        $("#temp2").Slide({
+            effect : "scroolX",
+            speed : "normal",
+            timer : 3000
+        });
+    });
+</script>
+<script th:src="@{/js/jquery.1.4.2-min.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+
+        /* 	1st example	*/
+
+        /// wrap inner content of each anchor with first layer and append background layer
+        $("#menu1 li a").wrapInner( '<span class="out"></span>' ).append( '<span class="bg"></span>' );
+
+        // loop each anchor and add copy of text content
+        $("#menu1 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu1 li a").hover(function() {
+            // this function is fired when the mouse is moved over
+            $(".out",	this).stop().animate({'top':	'40px'},	250); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		250); // move down - show
+            $(".bg",	this).stop().animate({'top':	'0px'},		120); // move down - show
+
+        }, function() {
+            // this function is fired when the mouse is moved off
+            $(".out",	this).stop().animate({'top':	'0px'},		250); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	250); // move up - hide
+            $(".bg",	this).stop().animate({'top':	'-40px'},	120); // move up - hide
+        });
+
+
+        /*	2nd example	*/
+
+        $("#menu2 li a").wrapInner( '<span class="out"></span>' );
+
+        $("#menu2 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu2 li a").hover(function() {
+            $(".out",	this).stop().animate({'top':	'40px'},	300); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		300); // move down - show
+
+        }, function() {
+            $(".out",	this).stop().animate({'top':	'0px'},		300); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	300); // move up - hide
+        });
+
+    });
+</script>
+<script th:src="@{/js/jq.Slide.js}"></script>
+</body>
+</html>

@@ -17,10 +17,17 @@ public class FarmInfo {
     private long id;
     @ApiModelProperty(value="农场名称")
     private String farmName;
+    private String farmImage;
+    private String farmTitle;
+    private String farmContent;
+    private String farmDesc;
+    private Long likes;
+    private Long dislikes;
+    private Long cares;
+    private Long looks;
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -33,6 +40,79 @@ public class FarmInfo {
 
     public void setFarmName(String farmName) {
         this.farmName = farmName;
+    }
+
+    @Basic
+    @Column(name = "farm_image")
+    public String getFarmImage() {
+        return farmImage;
+    }
+
+    public void setFarmImage(String farmImage) {
+        this.farmImage = farmImage;
+    }
+    @Basic
+    @Column(name = "farm_title")
+    public String getFarmTitle() {
+        return farmTitle;
+    }
+
+    public void setFarmTitle(String farmTitle) {
+        this.farmTitle = farmTitle;
+    }
+    @Basic
+    @Column(name = "farm_content")
+    public String getFarmContent() {
+        return farmContent;
+    }
+
+    public void setFarmContent(String farmContent) {
+        this.farmContent = farmContent;
+    }
+    @Basic
+    @Column(name = "farm_desc")
+    public String getFarmDesc() {
+        return farmDesc;
+    }
+
+    public void setFarmDesc(String farmDesc) {
+        this.farmDesc = farmDesc;
+    }
+    @Basic
+    @Column(name = "likes")
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
+    @Basic
+    @Column(name = "dislikes")
+    public Long getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(Long dislikes) {
+        this.dislikes = dislikes;
+    }
+    @Basic
+    @Column(name = "cares")
+    public Long getCares() {
+        return cares;
+    }
+
+    public void setCares(Long cares) {
+        this.cares = cares;
+    }
+    @Basic
+    @Column(name = "looks")
+    public Long getLooks() {
+        return looks;
+    }
+
+    public void setLooks(Long looks) {
+        this.looks = looks;
     }
 
     @Override

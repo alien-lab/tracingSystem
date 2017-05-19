@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="UTF-8"/>
+    <title>产品类型</title>
+    <link rel="stylesheet" th:href="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+
+</head>
+<body ng-app="productType">
+ <div class="container">
+     <div class="panel panel-danger">
+         <div class="panel-heading">
+             <h3 class="panel-title">产品的所有种类</h3>
+         </div>
+         <div class="panel-body" th:each="productType:${productTypes}">
+             <span th:text="${productType.productTypeName}" class="label label-info"></span>
+         </div>
+     </div>
+ </div>
+<script th:src="@{http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js}"></script>
+<script th:src="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+ <srcipt th:inline="javascript">
+
+</srcipt>
+</body>
+</html>

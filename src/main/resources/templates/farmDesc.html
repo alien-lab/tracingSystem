@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>绿之源农场详情</title>
+    <style>
+        .btn-default:hover{
+            background-color:#98fb98;
+        }
+    </style>
+    <style type="text/css">
+        #temp2{height:301px;width:709px;}
+        #temp2 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+        #temp2 .JQ-content-box .JQ-slide-content{position:absolute}
+        #temp2 .JQ-content-box li{width:549px;height:289px;float:left;}
+        #temp2 .JQ-content-box img{border-radius:8px;}
+        #temp2 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+        #temp2 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li img{width:127px;height:68px;display:block;border-radius:5px;}
+        /* #temp3{height:320px;width:710px;}
+         #temp3 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+         #temp3 .JQ-content-box .JQ-slide-content  li{position:absolute;top:0;left:0}
+         #temp3 .JQ-content-box img{width:549px;height:289px;display:block;margin-top:15px;border-radius:8px;}
+         #temp3 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+         #temp3 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li img{width:127px;height:63px;
+             margin-top: 26px;}*/
+    </style>
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css}" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
+    <link rel="stylesheet" th:href="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sheetstyle.css}"/>
+    <link th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="top">
+    <div id="top_main">
+        <div id="hello"> <span>您好，欢迎来到绿之源鲜果订单追溯系统首页！ </span> </div>
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation" style="background-color: transparent;border-color:#b0b0b0;margin-bottom:0px;">
+        <div class="container-fluid" >
+            <div class="title" style="margin-left:150px;margin-top:10px;float:left;">
+                <img th:src="@{/img/lvzhiyuanlogo.png}" style="height:35px;width:45px;"/>
+                <img th:src="@{/img/lvzhiyuan.png}"/>
+            </div>
+            <form action="#" th:action="@{/getItem}"  method="get">
+                <div class="row" style="background-color: #ffffff;">
+                    <div class="col-lg-5 col-md-offset-1" style="margin-top: 10px;margin-bottom: 10px;padding:0;">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入订单号" name="batchString" style="height:40px;"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="height:40px;background-color:#B3EE3A;"><i class="fa fa-search"></i> 搜 一 下 </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div id="menu2" class="menu">
+        <ul>
+            <li style="margin-left: 123px;"><a href="/user_index" >首　　页</a></li>
+            <li><a href="/allFarm">绿之源农场</a></li>
+            <li><a href="/allProducts">绿之源鲜果</a></li>
+            <!--<li><a href="/">绿之源批次</a></li>-->
+            <li><a href="/allCared">所关注农场</a></li>
+            <li><a href="/allCollected">所收藏鲜果</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" >
+            <li><img alt=" " th:src="@{'/head/'+${session.userInfo.getHead()}}" width="40px" height="40px" style="border-radius: 20px;"/></li>
+            <li><a href="/personal"  style="color:#F2F4F5;margin-right:120px;
+            margin-left:10px; margin-top: 10px;" th:text="${session.userInfo.getNickname()}">用户</a></li>
+        </ul>
+        <div class="cls"></div>
+    </div>
+</div>
+<div id="center" style="margin-top: 102px;">
+<div class="container">
+    <div class="panel " style="border:2px solid rgb(182, 231, 239);margin-top: 20px;">
+        <div class="panel-heading" style="background-color:rgb(182, 231, 239);">
+            <h3 class="panel-title" style="color:#000000;font-size:18px;">
+                <span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;农场信息页面</h3>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item" >
+                    <div class="two">
+                        <h3 style="margin-left: 60px;font-size:18px;padding-left: 5px;border-left:6px solid #54ea82;font-size:18px;">农场的基本信息</h3>
+                        <div class="farmDesc">
+                            <div class="left_panel" style="border-bottom:1px dashed #cccccc;height:160px;margin-left:50px;
+                margin-right:10px;margin-top:10px;padding:0 10px;"  >
+                                <div class="left_panel_image" style="float:left;height:115px;width:110px;">
+                                    <a>
+                                        <img th:src="@{'/img/nongsuo/'+${farmInfo.farmImage }}" style="width:100px;height:80px;border:1px solid #cccccc;padding:6px;" />
+                                    </a>
+                                    <div class="query" style="color:#197F02;height:20px;width:110px;text-align:center;">查看数：<span style="color:#ff0000;" th:text="${farmInfo.looks}"></span>人</div>
+                                </div>
+                                <div class="left_panel_jieshao" style="float:left;height:115px;margin-left:25px;width: 700px;text-align:left;color:#333;">
+                                    <h2 style="padding:0;margin:0;height: 25px; ">
+                                        <a   href="login" style="cursor:pointer; color:#0B79CE;font-size:18px;text-decoration: none;font-family:'微软雅黑','黑体','宋体';" th:text="${farmInfo.farmName}"></a>
+                                    </h2>
+                                    <div class="reason" style="height:30px;line-height: 20px;width: 700px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${farmInfo.farmTitle}"></label></div>
+                                    <div class="jianjie" style="height:25px;width: 700px;font-family: '微软雅黑','黑体','宋体';">简介：<span th:text="${farmInfo.farmDesc}"></span> </div>
+                                   <!-- <div class="jianjie_label" style="color:#0B79CE;height:20px;line-height: 20px;margin-top:10px;text-align: right;width:700px;font-family:'微软雅黑','黑体','宋体' ;">
+                                        <label class="label" style="color:#ff0000;">15</label>喜欢&nbsp;
+                                        <label class="label" style="color:#ff0000;">5</label>不喜欢&nbsp;
+                                        <label class="label" style="color:#ff0000;">3</label>关注
+                                    </div>-->
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <h3 style="margin-left: 60px;font-size:18px;padding-left: 5px;border-left:6px solid #54ea82;font-size:18px;">农场的详情</h3>
+                        <div  class="desc"  th:each="descItem:${descItems}">
+                            <div th:class="${descItem.itemType}? 'image'">
+                                <img th:if="${not #lists.isEmpty(descItem.itemLink)}" th:src="@{${descItem.itemFile}}"
+                                     style="display:block;margin-left:auto;margin-right:auto;" class="descitem"/>
+                            </div>
+                            <div  th:class="${descItem.itemType}? 'text'">
+                                <p th:text="${descItem.itemContent}" style="margin-left: 60px;font-size:15px;text-indent: 2.2em;"></p>
+                            </div>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+        <!--<input type="hidden" value="${type.id }" name="type_id"/>-->
+    </div>
+</div>
+</div>
+<div id="bottom" style="margin-top: 20px;border-top: 1px solid #A9A9A9;">
+    <span style="margin-left: 650px;position: relative;color:#A9A9A9; margin-top:10px;"> 版权归Alienlab工作室所有@Alienlab</span>
+</div>
+<!--<script th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+<script th:src="@{http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js}"></script>
+<script th:src="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        $("#temp2").Slide({
+            effect : "scroolX",
+            speed : "normal",
+            timer : 3000
+        });
+    });
+</script>
+<script th:src="@{/js/jquery.1.4.2-min.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+
+        /* 	1st example	*/
+
+        /// wrap inner content of each anchor with first layer and append background layer
+        $("#menu1 li a").wrapInner( '<span class="out"></span>' ).append( '<span class="bg"></span>' );
+
+        // loop each anchor and add copy of text content
+        $("#menu1 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu1 li a").hover(function() {
+            // this function is fired when the mouse is moved over
+            $(".out",	this).stop().animate({'top':	'40px'},	250); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		250); // move down - show
+            $(".bg",	this).stop().animate({'top':	'0px'},		120); // move down - show
+
+        }, function() {
+            // this function is fired when the mouse is moved off
+            $(".out",	this).stop().animate({'top':	'0px'},		250); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	250); // move up - hide
+            $(".bg",	this).stop().animate({'top':	'-40px'},	120); // move up - hide
+        });
+
+
+        /*	2nd example	*/
+
+        $("#menu2 li a").wrapInner( '<span class="out"></span>' );
+
+        $("#menu2 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu2 li a").hover(function() {
+            $(".out",	this).stop().animate({'top':	'40px'},	300); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		300); // move down - show
+
+        }, function() {
+            $(".out",	this).stop().animate({'top':	'0px'},		300); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	300); // move up - hide
+        });
+
+    });
+</script>
+<script th:inline="javascript">
+    $(function(){
+        $(".care").click(function(){
+            alert("关注函数"+$(this).next().val());
+            $.ajax({
+                url:"care",
+                type:"get",
+                data:{
+                    farm_id:$(this).next().val()
+                },
+                dataType:"text",
+                success:function(data){//回调函数
+                    //data类型：String，json,xml,JS片段，HTML片段
+                    alert(data);
+
+                }
+            });
+        });
+
+    });
+</script>
+<script th:src="@{/js/jq.Slide.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>绿之源鲜果列表</title>
+    <style>
+        .btn-default:hover{
+            background-color:#98fb98;
+        }
+    </style>
+    <style type="text/css">
+        #temp2{height:301px;width:709px;}
+        #temp2 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+        #temp2 .JQ-content-box .JQ-slide-content{position:absolute}
+        #temp2 .JQ-content-box li{width:549px;height:289px;float:left;}
+        #temp2 .JQ-content-box img{border-radius:8px;}
+        #temp2 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+        #temp2 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li img{width:127px;height:68px;display:block;border-radius:5px;}
+        /* #temp3{height:320px;width:710px;}
+         #temp3 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+         #temp3 .JQ-content-box .JQ-slide-content  li{position:absolute;top:0;left:0}
+         #temp3 .JQ-content-box img{width:549px;height:289px;display:block;margin-top:15px;border-radius:8px;}
+         #temp3 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+         #temp3 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li img{width:127px;height:63px;
+             margin-top: 26px;}*/
+    </style>
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css}" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
+    <link rel="stylesheet" th:href="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sheetstyle.css}"/>
+    <link th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="top">
+    <div id="top_main">
+        <div id="hello"> <span>您好，欢迎来到绿之源鲜果订单追溯系统首页！ </span> </div>
+        <div class="topright" style="float:right;">
+            <ul>
+                <li>
+                    <div class="cun"><a href="#">[登陆]</a> </div>
+                </li>
+                <li>
+                    <div class="cun"><a href="#">[免费注册]</a> </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation" style="background-color: transparent;border-color:#b0b0b0;margin-bottom:0px;">
+        <div class="container-fluid" >
+            <div class="title" style="margin-left:150px;margin-top:10px;float:left;">
+                <img th:src="@{/img/lvzhiyuanlogo.png}" style="height:35px;width:45px;"/>
+                <img th:src="@{/img/lvzhiyuan.png}"/>
+            </div>
+            <form action="#" th:action="@{/getItem}"  method="get">
+                <div class="row" style="background-color: #ffffff;">
+                    <div class="col-lg-5 col-md-offset-1" style="margin-top: 10px;margin-bottom: 10px;padding:0;">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入订单号" name="batchString" style="height:40px;"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="height:40px;background-color:#B3EE3A;"><i class="fa fa-search"></i> 搜 一 下 </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div id="menu2" class="menu">
+        <ul>
+            <li style="margin-left: 123px;"><a href="/index" >首　　页</a></li>
+            <li><a href="/allFarm">绿之源农场</a></li>
+            <li><a href="/allProducts">绿之源鲜果</a></li>
+            <!--<li><a href="/">绿之源批次</a></li>-->
+            <li><a href="/allCared">所关注农场</a></li>
+            <li><a href="/allCollected">所收藏鲜果</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" >
+            <li><img alt=" " th:src="@{'/head/'+${session.userInfo.getHead()}}" width="40px" height="40px" style="border-radius: 20px;"/></li>
+            <li><a href="/personal"  style="color:#F2F4F5;margin-right:120px;
+            margin-left:10px; margin-top: 10px;" th:text="${session.userInfo.getNickname()}">用户</a></li>
+            <!--th:href="@{'/personal?account='+${session.userInfo.getAccount()}}"-->
+        </ul>
+        <div class="cls"></div>
+    </div>
+</div>
+<div id="center" style="margin-top: 102px;">
+    <div class="container">
+        <div class="center_top_farm" >
+            <div class="media"  style="margin-top: 20px;" th:each="productInfo:${productInfos}">
+                <a class="pull-left" href="#">
+                    <img class="media-object" th:src="@{'/img/productsuo/'+${productInfo.productLogo }}" style="width:200px;height:140px;border-radius:6px;" alt="媒体对象"/>
+                </a>
+                <div class="media-body" style="color:#000000;">
+                    <h3 class="media-heading"><a href="/productInfoDesc/" style="font-size: 22px;font-weight: bold;color:#000;"
+                                                 th:text="${productInfo.productName}"></a></h3>
+                    <p style="color:#A9A9A9;"> <span class="glyphicon glyphicon-arrow-up" style="color:#98fb98;"></span>&nbsp;&nbsp;&nbsp;搜索指数：200次</p>
+                    <p th-text="${productInfo.productTitle}"></p>
+                    <p th:text="${productInfo.productDesc}" style=" height: 70px;width:600px;color:#888888; letter-spacing: 5px;display: block;text-indent: 2.8em; overflow: hidden;"></p>
+                    <p style="width: 600px;"><a href="#" class="more" target="_blank" style="float:right;">查看详情&gt;&gt;</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bottom" style="margin-top: 20px;border-top: 1px solid #A9A9A9;">
+    <span style="margin-left: 650px;position: relative;color:#A9A9A9; margin-top:10px;"> 版权归Alienlab工作室所有@Alienlab</span>
+</div>
+<script th:src="@{http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js}"></script>
+<script th:src="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        $("#temp2").Slide({
+            effect : "scroolX",
+            speed : "normal",
+            timer : 3000
+        });
+    });
+</script>
+<script th:src="@{/js/jquery.1.4.2-min.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+
+        /* 	1st example	*/
+
+        /// wrap inner content of each anchor with first layer and append background layer
+        $("#menu1 li a").wrapInner( '<span class="out"></span>' ).append( '<span class="bg"></span>' );
+
+        // loop each anchor and add copy of text content
+        $("#menu1 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu1 li a").hover(function() {
+            // this function is fired when the mouse is moved over
+            $(".out",	this).stop().animate({'top':	'40px'},	250); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		250); // move down - show
+            $(".bg",	this).stop().animate({'top':	'0px'},		120); // move down - show
+
+        }, function() {
+            // this function is fired when the mouse is moved off
+            $(".out",	this).stop().animate({'top':	'0px'},		250); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	250); // move up - hide
+            $(".bg",	this).stop().animate({'top':	'-40px'},	120); // move up - hide
+        });
+
+
+        /*	2nd example	*/
+
+        $("#menu2 li a").wrapInner( '<span class="out"></span>' );
+
+        $("#menu2 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu2 li a").hover(function() {
+            $(".out",	this).stop().animate({'top':	'40px'},	300); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		300); // move down - show
+
+        }, function() {
+            $(".out",	this).stop().animate({'top':	'0px'},		300); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	300); // move up - hide
+        });
+
+    });
+</script>
+<script th:src="@{/js/jq.Slide.js}"></script>
+<!--<script th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+</body>
+</html>

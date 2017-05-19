@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>绿之源用户个人资料</title>
+    <style>
+        .btn-default:hover{
+            background-color:#98fb98;
+        }
+    </style>
+    <style type="text/css">
+        #temp2{height:301px;width:709px;}
+        #temp2 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+        #temp2 .JQ-content-box .JQ-slide-content{position:absolute}
+        #temp2 .JQ-content-box li{width:549px;height:289px;float:left;}
+        #temp2 .JQ-content-box img{border-radius:8px;}
+        #temp2 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+        #temp2 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:13px;width:133px;height:75px;padding-top:6px;margin-bottom:3px;}
+        #temp2 .JQ-slide-nav li img{width:127px;height:68px;display:block;border-radius:5px;}
+        /* #temp3{height:320px;width:710px;}
+         #temp3 .JQ-content-box{float:left;overflow:hidden;width:549px;height:289px;margin:6px 0 0 6px;_margin:6px 0 0 3px;position:relative}
+         #temp3 .JQ-content-box .JQ-slide-content  li{position:absolute;top:0;left:0}
+         #temp3 .JQ-content-box img{width:549px;height:289px;display:block;margin-top:15px;border-radius:8px;}
+         #temp3 .JQ-slide-nav{display:block;float:right;width:145px;height:301px;overflow:hidden;}
+         #temp3 .JQ-slide-nav li{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li.on{display:inline;float:left;padding-left:12px;padding-bottom:6px;width:133px;height:61px;padding-top:6px;margin-bottom:3px;}
+         #temp3 .JQ-slide-nav li img{width:127px;height:63px;
+             margin-top: 26px;}*/
+    </style>
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
+    <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css}" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
+    <link rel="stylesheet" th:href="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/sheetstyle.css}"/>
+    <link th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="top">
+    <div id="top_main">
+        <div id="hello"> <span>您好，欢迎来到绿之源鲜果订单追溯系统首页！ </span> </div>
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation" style="background-color: transparent;border-color:#b0b0b0;margin-bottom:0px;">
+        <div class="container-fluid" >
+            <div class="title" style="margin-left:150px;margin-top:10px;float:left;">
+                <img th:src="@{/img/lvzhiyuanlogo.png}" style="height:35px;width:45px;"/>
+                <img th:src="@{/img/lvzhiyuan.png}"/>
+            </div>
+            <form action="#" th:action="@{/getItem}"  method="get">
+                <div class="row" style="background-color: #ffffff;">
+                    <div class="col-lg-5 col-md-offset-1" style="margin-top: 10px;margin-bottom: 10px;padding:0;">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入订单号" name="batchString" style="height:40px;"/>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="height:40px;background-color:#B3EE3A;"><i class="fa fa-search"></i> 搜 一 下 </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div id="menu2" class="menu">
+        <ul>
+            <li style="margin-left: 123px;"><a href="/index" >首　　页</a></li>
+            <li><a href="/allFarm">绿之源农场</a></li>
+            <li><a href="/allProducts">绿之源鲜果</a></li>
+            <!--<li><a href="/">绿之源批次</a></li>-->
+            <li><a href="/allCared">所关注农场</a></li>
+            <li><a href="/allCollected">所收藏鲜果</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" >
+            <li><img alt=" " th:src="@{'/head/'+${session.userInfo.getHead()}}" width="40px" height="40px" style="border-radius: 20px;"/></li>
+            <li><a href="/personal"  style="color:#F2F4F5;margin-right:120px;
+            margin-left:10px; margin-top: 10px;" th:text="${session.userInfo.getNickname()}">用户</a></li>
+            <!--th:href="@{'/personal?account='+${session.userInfo.getAccount()}}"-->
+        </ul>
+        <div class="cls"></div>
+    </div>
+</div>
+<div id="center" style="margin-top: 102px;">
+    <div class="container" id="context">
+        <div class="panel" style="border:2px solid #9de8c5;margin-top: 15px;">
+            <div class="panel-heading" style="background-color:#9de8c5">
+                <h3 class="panel-title" style="color:#000000;font-size:18px;" th:text="${session.userInfo.getNickname()+'的个人资料'}">
+                    <span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;</h3>
+            </div>
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="zuo" style="margin-left: 140px;">
+                            <a class="media-left" href="#">
+                                <form action="#" th:action="@{/uploadHead}" method="post" enctype="multipart/form-data">
+                                    <input type="file" id="btn_file" name="file" style="display:none"/>
+                                    <img th:src="@{'/head/'+${session.userInfo.getHead()}}"
+                                         alt="媒体对象" style="width:220px;height:250px;border-radius: 20px;" id="userhead"/><br/><br/>
+                                    <input type="submit" class="btn " style="margin-top:10px;height: 40px;width:220px;background-color: #f3bc5d;color: #fff;" value="保存头像"/>
+                                </form>
+                            </a><br/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="you" style=" margin-top: 50px;">
+                            <span style="font-size: 24px">昵称：<a href="#" style="font-size:15px;color:#333333;" ><span th:text="${session.userInfo.getNickname()}" style="font-size: 24px"></span></a></span><br/><br/>
+                            <span style="font-size: 24px">性别：<span th:text="${session.userInfo.getSex()}" style="font-size: 24px"></span></span><br/><br/>
+                            <span style="font-size: 24px">电话：<span th:text="${session.userInfo.getPhone()}" style="font-size: 24px"></span></span><br/><br/>
+                            <span style="font-size: 24px">地址：<span th:text="${session.userInfo.getAddress()}" style="font-size: 24px"></span></span><br/><br/>
+                            <span >
+                                             <button class="btn " data-toggle="modal" data-target="#myModal" style="margin-top:29px;height:40px;width: 200px;background-color: #b787de;color: #fff;">编辑个人资料</button>
+                                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                    &times;
+                                                                </button>
+                                                                <h4 class="modal-title" id="myModalLabel">
+                                                                    <span class="glyphicon glyphicon-pencil"></span>修改个人资料
+                                                                </h4>
+
+                                                            </div>
+                                                               <div  class="modal-body" style="margin-left:120px;margin-right:20px;">
+                                                                   <form action="#" th:action="@{/modifyUserInfo}" method="post">
+                                                                       <div>
+                                                                           <br/>
+                                                                           <input type="text" class="form-control" id="nickname" name="nickname" placeholder="请输入昵称" th:value="${session.userInfo.getNickname()}"/>
+                                                                           <br/>
+                                                                           <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入电话" th:value="${session.userInfo.getPhone()}"/>
+                                                                           <br/>
+                                                                           <input type="text" class="form-control" id="address" name="address" placeholder="请输入地址" th:value="${session.userInfo.getAddress()}"/>
+                                                                           <br/>
+
+                                                                       </div>
+
+                                                                       <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                                                        </button>
+                                                                        <button type="submit" class="btn btn-primary">
+                                                                            提交修改
+                                                                        </button>
+                                                                       </div>
+                                                                  </form>
+                                                                </div>
+
+                                                        </div>
+                                                    </div>
+                                          </div>
+                        </span>
+                    </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bottom" style="margin-top: 20px;border-top: 1px solid #A9A9A9;">
+    <span style="margin-left: 650px;position: relative;color:#A9A9A9; margin-top:10px;"> 版权归Alienlab工作室所有@Alienlab</span>
+</div>
+<!--<script th:src="@{https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js}" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+<script th:src="@{http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js}"></script>
+<script th:src="@{http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        $("#temp2").Slide({
+            effect : "scroolX",
+            speed : "normal",
+            timer : 3000
+        });
+    });
+</script>
+<script th:src="@{/js/jquery.1.4.2-min.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+
+        /* 	1st example	*/
+
+        /// wrap inner content of each anchor with first layer and append background layer
+        $("#menu1 li a").wrapInner( '<span class="out"></span>' ).append( '<span class="bg"></span>' );
+
+        // loop each anchor and add copy of text content
+        $("#menu1 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu1 li a").hover(function() {
+            // this function is fired when the mouse is moved over
+            $(".out",	this).stop().animate({'top':	'40px'},	250); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		250); // move down - show
+            $(".bg",	this).stop().animate({'top':	'0px'},		120); // move down - show
+
+        }, function() {
+            // this function is fired when the mouse is moved off
+            $(".out",	this).stop().animate({'top':	'0px'},		250); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	250); // move up - hide
+            $(".bg",	this).stop().animate({'top':	'-40px'},	120); // move up - hide
+        });
+
+
+        /*	2nd example	*/
+
+        $("#menu2 li a").wrapInner( '<span class="out"></span>' );
+
+        $("#menu2 li a").each(function() {
+            $( '<span class="over">' +  $(this).text() + '</span>' ).appendTo( this );
+        });
+
+        $("#menu2 li a").hover(function() {
+            $(".out",	this).stop().animate({'top':	'40px'},	300); // move down - hide
+            $(".over",	this).stop().animate({'top':	'0px'},		300); // move down - show
+
+        }, function() {
+            $(".out",	this).stop().animate({'top':	'0px'},		300); // move up - show
+            $(".over",	this).stop().animate({'top':	'-40px'},	300); // move up - hide
+        });
+
+    });
+</script>
+<script th:src="@{/js/jq.Slide.js}"></script>
+<script th:inline="javascript">
+    $(function(){
+        $("#userhead").click(function(){
+            $("#btn_file").click();//隐藏了input：file的样式，点击头像就可以选择文件
+            $("#btn_file").change(function () {
+                var objUrl=getObjectURL(this.files[0]);//获取图片路径，该路径不是图片在本地的路径
+                if(objUrl){
+                    $("#userhead").attr("src",objUrl);// 将图片路径存入到src中，显示出图片
+                }
+            });
+
+        });
+    });
+
+    function getObjectURL(file){
+        var url=null;
+        if(window.createObjectURL != undefined){//basic
+            url=window.createObjectURL(file);
+        }
+        else if(window.URL != undefined){//mozilla(firefox)
+            url=window.URL.createObjectURL(file);
+        }
+        else if(window.webkitURL != undefined){//webkit or chrome
+            url=window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+</script>
+</body>
+</html>

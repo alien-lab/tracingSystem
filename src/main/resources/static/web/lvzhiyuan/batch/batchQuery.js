@@ -22,7 +22,7 @@
             var name = str.split("-")[0];
             var batchnumber = str.split("-")[1];
             $scope.ordernumber = str.split("-")[2];
-            var batchinfo = name+"-"+batchnumber;//batchinfo 为搜索内容分割后的 例如：LZY-LIZI1
+            var batchinfo = name+"-"+batchnumber;//batchinfo 为搜索内容分割后的 例如：LZYLIZI-1
             $scope.batchinfo = batchinfo;
             $scope.infostates = true;
             getBatchService.getBatch(batchinfo,function(data){
