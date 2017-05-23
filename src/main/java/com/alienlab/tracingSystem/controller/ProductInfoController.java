@@ -93,7 +93,13 @@ public class ProductInfoController {
     @PostMapping(value = "/update")
     public ResponseEntity updateProduct(@RequestParam Long productId ,@RequestParam String productName,@RequestParam String productDesc ,@RequestParam Double productPrice,
                                         @RequestParam String productFlag,@RequestParam long farmid,@RequestParam String status){
-
+        System.out.println("p"+productId);
+        System.out.println("p"+productName);
+        System.out.println("p"+productDesc);
+        System.out.println("p"+productPrice);
+        System.out.println("p"+productFlag);
+        System.out.println("f"+farmid);
+        System.out.println("s"+status);
         FarmInfo farmInfo=farmInfoService.getFarmInfoById(farmid);
         ProductInfo productInfo=new ProductInfo();
         productInfo.setProductName(productName);
@@ -114,6 +120,7 @@ public class ProductInfoController {
             er.setData((JSON) com.alibaba.fastjson.JSON.toJSON(result));
             return ResponseEntity.ok().body(er);
         }
+
     }
 
 }

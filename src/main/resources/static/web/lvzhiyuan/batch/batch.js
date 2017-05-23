@@ -71,7 +71,7 @@
             console.log("batch_id",batchid);
             var promitInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'system/common/promit.html',
+                templateUrl: 'lvzhiyuan/batch/promit.html',
                 controller:function($scope,$uibModalInstance){
                     $scope.title="操作确认";
                     $scope.text="确认删除该批次吗？";
@@ -156,7 +156,7 @@
             }
             var promitInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'system/common/promit.html',
+                templateUrl: 'lvzhiyuan/batch/promit.html',
                 controller: function($scope,$uibModalInstance){
                     $scope.title="操作确认";
                     $scope.text="确认删除该批次吗？";

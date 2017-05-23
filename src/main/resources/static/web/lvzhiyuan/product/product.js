@@ -239,7 +239,7 @@
     product_module.controller("modifyProductController",["$scope","farmService","productService","$uibModalInstance","productinstance",function ($scope,farmService,productService,$uibModalInstance,productinstance) {
         $scope.pagetitle="更新产品信息";
         $scope.productStatus=["预售","筹备","采摘","运输"];
-        console.log("modifyProductController".$scope);
+        console.log("modifyProductController",$scope);
         $scope.form=productinstance.modify;
         console.log($scope.form);
         $scope.form.advoption=true;
@@ -258,8 +258,8 @@
                 farmid:$scope.form.farmid,
                 status:$scope.form.status
             },function (data) {
-                // console.log($scope.form);
-                // console.log(data);
+                 // console.log($scope.form);
+                 console.log(data);
                 $scope.loading = false;
                 if(data.result > 0) {
                     $uibModalInstance.close(data);

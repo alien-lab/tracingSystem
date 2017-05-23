@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by master on 2017/5/14.
@@ -39,6 +41,8 @@ public class QianController {
     private GetBatchService getBatchService;
     @Autowired
     private  CareService careService;
+    @Autowired
+    private CollectService collectService;
     @Autowired
     private FarmItemService farmItemService;
     @Autowired
@@ -96,9 +100,19 @@ public class QianController {
             List<Care> cares=careService.findCaresByAccount(account);
             System.out.println("cares"+cares.size());
             List<FarmInfo> farmInfos=farmInfoService.getFarms();
+            Map<FarmInfo,Boolean> map = new HashMap<>();
+            for (FarmInfo f : farmInfos) {
+                Boolean flag =  careService.checkIfCare(f.getId(),account);
+                map.put(f,flag);
+            }
             List<ProductInfo> productInfos=productInfoService.getProducts();
-            mav.addObject("farmInfos",farmInfos);
-            mav.addObject("productInfos",productInfos);
+            Map<ProductInfo,Boolean> productsMap=new HashMap<>();
+            for(ProductInfo p:productInfos){
+                Boolean flag=collectService.checkIfCollect(p.getId(),account);
+                productsMap.put(p,flag);
+            }
+            mav.addObject("largeMap",map);
+            mav.addObject("productsMap",productsMap);
             mav.addObject("cares",cares);
         }
         return mav;
@@ -109,6 +123,30 @@ public class QianController {
         model.addAttribute("farmInfos",farmInfos);
         String account = ((UserInfo)request.getSession().getAttribute("userInfo")).getAccount();
         return "allFarm";
+    }
+    @RequestMapping("user_index")
+    public ModelAndView user_index(HttpServletRequest request){
+        String account=((UserInfo)request.getSession().getAttribute("userInfo")).getAccount();
+        ModelAndView mav=new ModelAndView("user_index");
+        List<Care> cares=careService.findCaresByAccount(account);
+        System.out.println("cares"+cares.size());
+        List<FarmInfo> farmInfos=farmInfoService.getFarms();
+        Map<FarmInfo,Boolean> map = new HashMap<>();
+        for (FarmInfo f : farmInfos) {
+            Boolean flag =  careService.checkIfCare(f.getId(),account);
+            map.put(f,flag);
+        }
+        List<ProductInfo> productInfos=productInfoService.getProducts();
+        Map<ProductInfo,Boolean> productsMap=new HashMap<>();
+        for(ProductInfo p:productInfos){
+            Boolean flag=collectService.checkIfCollect(p.getId(),account);
+            productsMap.put(p,flag);
+        }
+        mav.addObject("largeMap",map);
+        mav.addObject("productsMap",productsMap);
+        mav.addObject("cares",cares);
+        return mav;
+
     }
     @RequestMapping("allProducts")
     public String allProduct(Model model,HttpServletRequest request){
@@ -178,19 +216,28 @@ public class QianController {
         request.getSession().setAttribute("userInfo", userInfo);//更新session信息
         return "redirect:personal.do";//controller重定向
     }
-    @RequestMapping(value="care",method = RequestMethod.GET)
+    @RequestMapping(value="care",method = RequestMethod.POST)
     @ResponseBody
     public String Care(HttpServletRequest request,HttpServletResponse response,Long farm_id) throws IOException{
         UserInfo userInfo=(UserInfo)request.getSession().getAttribute("userInfo");
-
         Care care=new Care(farm_id,userInfo.getAccount());
-        careService.addCare(care);//调用关注话题功能
+        careService.addCares(care);//调用关注农场功能
         return "关注成功!!!";//通过out向客户端传送数据
+    }
+    @RequestMapping(value="collect",method = RequestMethod.POST)
+    @ResponseBody
+    public String Collect(HttpServletRequest request,HttpServletResponse response,Long product_id) throws IOException{
+        UserInfo userInfo=(UserInfo)request.getSession().getAttribute("userInfo");
+        Collect collect=new Collect(product_id,userInfo.getAccount());
+        collectService.addCollects(collect);//调用关注话题功能
+        return "收藏成功!!!";//通过out向客户端传送数据
     }
     @RequestMapping("farmDesc")
     public ModelAndView farmDesc(HttpServletRequest request,Long farm_id){
         ModelAndView mav=new ModelAndView("farmDesc");
         FarmInfo farmInfo=farmInfoService.getFarmInfoById(farm_id);
+        farmInfo.setLooks(farmInfo.getLooks()+1);
+        farmInfoService.updateFarm(farmInfo);
         List<FarmItem>farmItems=farmItemService.getItems(farm_id);
         List<DescItem> descItems=new ArrayList<>();
         for (FarmItem farmItem:farmItems){
@@ -208,6 +255,8 @@ public class QianController {
     public ModelAndView productDesc(HttpServletRequest request,Long product_id){
         ModelAndView mav=new ModelAndView("productDesc");
         ProductInfo productInfo=productInfoService.getProductInfoById(product_id);
+        productInfo.setLooks(productInfo.getLooks()+1);
+        productInfoService.updateProduct(productInfo);
         List<ProductItem> productItems=productItemService.getItems(product_id);
         List<DescItem> descItems=new ArrayList<>();
         for (ProductItem productItem:productItems){

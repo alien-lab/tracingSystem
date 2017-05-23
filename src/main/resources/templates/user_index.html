@@ -34,6 +34,11 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/sheetstyle.css}"/>
     <link th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+    <style>
+        .cancel_care{
+            display:
+        }
+    </style>
 </head>
 <body>
 <div id="top">
@@ -66,8 +71,8 @@
             <li><a href="/allFarm">绿之源农场</a></li>
             <li><a href="/allProducts">绿之源鲜果</a></li>
             <!--<li><a href="/">绿之源批次</a></li>-->
-            <li><a href="/allCared">所关注农场</a></li>
-            <li><a href="/allCollected">所收藏鲜果</a></li>
+           <!-- <li><a href="/allCared">所关注农场</a></li>
+            <li><a href="/allCollected">所收藏鲜果</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right" >
             <li><img alt=" " th:src="@{'/head/'+${session.userInfo.getHead()}}" width="40px" height="40px" style="border-radius: 20px;" /></li>
@@ -103,13 +108,13 @@
             <div class="panel panel-default" style="margin-top: 15px;margin-left:150px;width: 340px;border-color:#a0e6d3;">
                 <div class="panel-heading" style="background-color: #a0e6d3;"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;最近热搜</div>
                 <table class="table">
-                    <tr style="color:#000000"><td >奶油草莓-<span>朴实农场</span></td><td>200次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
-                    <tr style="color:#000000"><td>菠萝-<span>开心农场</span></td><td>198次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
-                    <tr style="color:#000000"><td>香蕉-<span>开心农场</span></td><td>197次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
-                    <tr style="color:#000000"><td>苹果-<span>开心农场</span></td><td>196次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
-                    <tr style="color:#000000"><td>菠萝-<span>开心农场</span></td><td>195次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
-                    <tr style="color:#000000"><td>香蕉-<span>开心农场</span></td><td>194次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
-                    <tr style="color:#000000"><td>苹果-<span>开心农场</span></td><td>193次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
+                    <tr style="color:#000000"><td >奶油草莓-<span>富田农场</span></td><td>100次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
+                    <tr style="color:#000000"><td>柳丁李子-<span>大溪农场</span></td><td>90次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
+                    <tr style="color:#000000"><td>大山青枣-<span>清境农场</span></td><td>87次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
+                    <tr style="color:#000000"><td>金帅苹果-<span>武陵农场</span></td><td>84次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
+                    <tr style="color:#000000"><td>菠萝草莓-<span>富田农场</span></td><td>79次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
+                    <tr style="color:#000000"><td>芝麻香蕉-<span>清境农场</span></td><td>69次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
+                    <tr style="color:#000000"><td>天山雪莲-<span>大溪农场</span></td><td>66次<span class="glyphicon glyphicon-arrow-down"></span></td></tr>
                 </table>
             </div>
         </div>
@@ -124,26 +129,26 @@
                             &nbsp;&nbsp;农场区域
                         </h4>
                     </div>
-                    <div class="left_panel" style="border-bottom:1px dashed #cccccc;height:115px;margin-left:10px;margin-right:10px;margin-top:10px;padding:0 10px;"  th:each="farmInfo:${farmInfos}">
+                    <div class="left_panel" style="border-bottom:1px dashed #cccccc;height:115px;margin-left:10px;margin-right:10px;margin-top:10px;padding:0 10px;"  th:each="map:${largeMap}">
                         <div class="left_panel_image" style="float:left;height:115px;width:110px;">
                             <a>
-                                <img th:src="@{'/img/nongsuo/'+${farmInfo.farmImage }}" style="width:100px;height:80px;border:1px solid #cccccc;padding:6px;" />
+                                <img th:src="@{'/img/nongsuo/'+${map.key.farmImage }}" style="width:100px;height:80px;border:1px solid #cccccc;padding:6px;" />
                             </a>
-                            <div class="query" style="color:#197F02;height:20px;width:110px;text-align:center;">查看数：<span style="color:#ff0000;">312</span>人</div>
+                            <div class="query" style="color:#197F02;height:20px;width:110px;text-align:center;">查看数：<span style="color:#ff0000;" th:text="${map.key.looks}"></span>人</div>
                         </div>
                         <div class="left_panel_jieshao" style="float:left;height:115px;margin-left:25px;width: 672px;text-align:left;color:#333;">
                             <h2 style="padding:0;margin:0;height: 25px; ">
-                                <a href="#" th:href="@{'/farmDesc?farm_id='+${farmInfo.id}}" style="cursor:pointer; color:#0B79CE;font-size:18px;text-decoration: none;font-family:'微软雅黑','黑体','宋体';" th:text="${farmInfo.farmName}"></a>
+                                <a href="#" th:href="@{'/farmDesc?farm_id='+${map.key.id}}" style="cursor:pointer; color:#0B79CE;font-size:18px;text-decoration: none;font-family:'微软雅黑','黑体','宋体';" th:text="${map.key.farmName}"></a>
                             </h2>
-                            <div class="reason" style="height:30px;line-height: 20px;width: 672px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${farmInfo.farmTitle}"></label></div>
+                            <div class="reason" style="height:30px;line-height: 20px;width: 672px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${map.key.farmTitle}"></label></div>
                             <div class="jianjie" style="height:25px;width: 672px;font-family: '微软雅黑','黑体','宋体';">
-                                简介：<span th:text="${farmInfo.farmContent}"></span>
-                                <a  href="#" th:href="@{'/farmDesc?farm_id='+${farmInfo.id}}" target="_blank" style="color:#0B79CE;text-decoration: none">详情>></a>
+                                简介：<span th:text="${map.key.farmContent}"></span>
+                                <a  href="#" th:href="@{'/farmDesc?farm_id='+${map.key.id}}" target="_blank" style="color:#0B79CE;text-decoration: none">详情>></a>
                             </div>
                             <div class="jianjie_label" style="color:#0B79CE;height:20px;line-height: 20px;margin-top:10px;text-align: right;width:672px;font-family:'微软雅黑','黑体','宋体' ;">
-                                <label class="label" style="color:#ff0000;">15</label>喜欢&nbsp;
-                                <label class="label" style="color:#ff0000;">5</label>不喜欢&nbsp;
-                                <label class="label" style="color:#ff0000;">3</label>关注
+                                <label class="label" style="color:#ff0000;" th:text="${map.key.likes }"></label>喜欢&nbsp;
+                                <label class="label" style="color:#ff0000;" th:text="${map.key.dislikes }"></label>不喜欢&nbsp;
+                                <label class="label" style="color:#ff0000;" th:text="${map.key.cares }">3</label>关注
                             </div>
                         </div>
 
@@ -155,23 +160,34 @@
                         <div title="hotfarm">
                             <h4 style="color: #000;">
                                 <span class="glyphicon glyphicon-pencil" style="font-size: 19px;color:#87c110;"></span>
-                                &nbsp;&nbsp;推荐农场
+                                &nbsp;&nbsp;热搜农场
                             </h4>
                         </div>
-                        <div class="media" th:each="farmInfo:${farmInfos}">
+                        <div class="media" th:each="map:${largeMap}">
                             <a class="pull-left" href="login">
-                                <img class="media-object" th:src="@{'/img/nongsuo/'+${farmInfo.farmImage }}" style="width:80px;height:80px;border-radius:40px;" alt="媒体对象"/>
+                                <img class="media-object" th:src="@{'/img/nongsuo/'+${map.key.farmImage }}" style="width:80px;height:80px;border-radius:40px;" alt="媒体对象"/>
                             </a>
                             <div class="media-body" style="color:#000000;">
-                                <h3 class="media-heading" style="margin-top: 5px;"><a href="login" style="font-size: 15px;" th:text="${farmInfo.farmName}"></a>
-                                    <span  id="guanzhu"  class="label label-info glyphicon-plus care"
-                                           style="cursor:pointer; background-color: #fff; color:#3598db;font-size: 15%;float:right;" >关注</span>
+                                <h3 class="media-heading" style="margin-top: 5px;" th:if="${map.value eq true}">
+                                    <a href="#" th:href="@{'/farmDesc?farm_id='+${map.key.id}}" style="font-size: 15px;" th:text="${map.key.farmName}" ></a>
+                                    <span   class="label label-info glyphicon-plus care add_care"
+                                           style="cursor:pointer; background-color: #fff; color:#3598db;font-size: 15%;float:right;display: none">关注</span>
+                                    <span   class="label label-info care have_care"
+                                            style="cursor:pointer; background-color: #fff; color:#3598db;font-size: 15%;float:right;display: block;">已关注</span>
+                                    <input type="hidden" th:value="${map.key.id }" name="farm_id"/>
                                 </h3>
-                                <p th:text="${farmInfo.farmTitle}"></p>
+                                <h3 class="media-heading" style="margin-top: 5px;" th:if="${map.value eq false}">
+                                    <a href="login" style="font-size: 15px;" th:text="${map.key.farmName}" ></a>
+                                    <span   class="label label-info glyphicon-plus care add_care"
+                                            style="cursor:pointer; background-color: #fff; color:#3598db;font-size: 15%;float:right;display: block;">关注</span>
+                                    <span   class="label label-info care have_care"
+                                            style="cursor:pointer; background-color: #fff; color:#3598db;font-size: 15%;float:right;display: none;" >已关注</span>
+                                    <input type="hidden" th:value="${map.key.id }" name="farm_id"/>
+                                </h3>
+                                <p th:text="${map.key.farmTitle}"></p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div style="margin-top:10px;">
@@ -180,42 +196,42 @@
         </div>
         <div class="center_center_product" style="border-top: 1px solid #A9A9A9;">
             <div class="row">
-                <div class="col-md-9" style="height:612px;overflow: hidden;">
+                <div class="col-md-9" style="height:642px;overflow: hidden;">
                     <div title="hotproducts">
                         <h4 style="color: #000;border-bottom:2px solid #cccccc;font-size: 18px;">
                             <span class="glyphicon glyphicon-shopping-cart" style="font-size: 20px;color:#87c110;"></span>
                             &nbsp;&nbsp;鲜果区域
                         </h4>
                     </div>
-                    <div class="left_panel" style="border-bottom:1px dashed #cccccc;height:140px;margin-left:10px;margin-right:10px;margin-top:10px;padding:0 10px;"  th:each="product:${productInfos}">
+                    <div class="left_panel" style="border-bottom:1px dashed #cccccc;height:140px;margin-left:10px;margin-right:10px;margin-top:10px;padding:0 10px;"  th:each="map:${productsMap}">
                         <div class="left_panel_image" style="float:left;height:115px;width:110px;">
                             <a>
-                                <img th:src="@{'/img/productsuo/'+${product.productLogo }}" style="width:110px;height:100px;border:1px solid #cccccc;padding:6px;" />
+                                <img th:src="@{'/img/productsuo/'+${map.key.productLogo }}" style="width:110px;height:100px;border:1px solid #cccccc;padding:6px;" />
                             </a>
-                            <div class="query" style="color:#197F02;height:20px;width:110px;text-align:center;">查看数：<span style="color:#ff0000;" th:text="${product.looks }"></span>人</div>
+                            <div class="query" style="color:#197F02;height:20px;width:110px;text-align:center;">查看数：<span style="color:#ff0000;" th:text="${map.key.looks }"></span>人</div>
                         </div>
                         <div class="left_panel_jieshao" style="float:left;height:115px;margin-left:25px;width: 672px;text-align:left;color:#333;">
                             <h2 style="padding:0;margin:0;height: 25px; ">
-                                <a   href="#" th:href="@{'/productDesc?product_id='+${product.id}}" style="cursor:pointer; color:#0B79CE;font-size:18px;text-decoration: none;font-family:'微软雅黑','黑体','宋体';" th:text="${product.productName}"></a>
+                                <a   href="#" th:href="@{'/productDesc?product_id='+${map.key.id}}" style="cursor:pointer; color:#0B79CE;font-size:18px;text-decoration: none;font-family:'微软雅黑','黑体','宋体';" th:text="${map.key.productName}"></a>
                             </h2>
                             <div class="za" style="height:30px;line-height: 20px;width: 672px;font-family: '微软雅黑','黑体','宋体';">
-                                价格：<label style="font-weight:bold;color:red;" th:text="${product.productPrice}"></label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                来自：<label style="font-weight:bold;color: darkmagenta;" th:text="${product.farmNameByFarmId.farmName}"></label>
+                                价格：<label style="font-weight:bold;color:red;" th:text="${map.key.productPrice}"></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                来自：<label style="font-weight:bold;color: darkmagenta;" th:text="${map.key.farmNameByFarmId.farmName}"></label>
                             </div>
-                            <div class="reason" style="height:30px;line-height: 20px;width: 672px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${product.productTitle}"></label></div>
+                            <div class="reason" style="height:30px;line-height: 20px;width: 672px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${map.key.productTitle}"></label></div>
                             <div class="jianjie" style="height:25px;width: 672px;font-family: '微软雅黑','黑体','宋体';">
-                                简介：<span th:text="${product.productContent}"></span>
-                                <a href="#" th:href="@{'/productDesc?product_id='+${product.id}}" target="_blank" style="color:#0B79CE;text-decoration: none">详情>></a>
+                                简介：<span th:text="${map.key.productContent}"></span>
+                                <a href="#" th:href="@{'/productDesc?product_id='+${map.key.id}}" target="_blank" style="color:#0B79CE;text-decoration: none">详情>></a>
                             </div>
                             <div class="jianjie_label" style="color:#0B79CE;height:20px;line-height: 20px;margin-top:10px;text-align: right;width:672px;font-family:'微软雅黑','黑体','宋体' ;">
-                                <label class="label" style="color:#ff0000;" th:text="${product.nice }"></label>好吃&nbsp;
-                                <label class="label" style="color:#ff0000;" th:text="${product.bad }"></label>不好吃&nbsp;
-                                <label class="label" style="color:#ff0000;" th:text="${product.collection }"></label>收藏
+                                <label class="label" style="color:#ff0000;" th:text="${map.key.nice }"></label>好吃&nbsp;
+                                <label class="label" style="color:#ff0000;" th:text="${map.key.bad }"></label>不好吃&nbsp;
+                                <label class="label" style="color:#ff0000;" th:text="${map.key.collection }"></label>收藏
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3" style="height:612px;overflow: hidden;">
+                <div class="col-md-3" style="height:642px;overflow: hidden;">
                     <div class="product">
                         <div title="hotproduct">
                             <h4 style="color: #000;border-bottom: 2px solid #CCCCCC;" >
@@ -223,16 +239,28 @@
                                 &nbsp;&nbsp;热搜鲜果
                             </h4>
                         </div>
-                        <div class="media" th:each="product:${productInfos}">
+                        <div class="media" th:each="map:${productsMap}">
                             <a class="pull-left" href="login">
-                                <img class="media-object" th:src="@{'/img/productsuo/'+${product.productLogo }}" style="width:80px;height:80px;border-radius:40px;" alt="媒体对象"/>
+                                <img class="media-object" th:src="@{'/img/productsuo/'+${map.key.productLogo }}" style="width:80px;height:80px;border-radius:40px;" alt="媒体对象"/>
                             </a>
                             <div class="media-body" style="color:#000000;">
-                                <h3 class="media-heading" style="margin-top: 5px;"><a href="login" style="font-size: 15px;" th:text="${product.productName}"></a>
-                                    <span  id="collection"  class="label label-info glyphicon-plus care"
-                                           style="cursor:pointer; background-color: #fff; color:#3598db;font-size: 15%;float:right;" >收藏</span>
+                                <h3 class="media-heading" style="margin-top: 5px;" th:if="${map.value eq true}">
+                                    <a  href="#" th:href="@{'/productDesc?product_id='+${map.key.id}}" style="font-size: 15px;" th:text="${map.key.productName}" ></a>
+                                    <span   class="label label-info glyphicon glyphicon-star-empty add_collect"
+                                            style="cursor:pointer; background-color: #fff; color:#f18d12;font-size: 15%;float:right;display: none">收藏</span>
+                                    <span   class="label label-info care have_collect"
+                                            style="cursor:pointer; background-color: #fff; color:#f18d12;font-size: 15%;float:right;display: block;">已收藏</span>
+                                    <input type="hidden" th:value="${map.key.id }" name="product_id"/>
                                 </h3>
-                                <p th:text="${product.productTitle}"></p>
+                                <h3 class="media-heading" style="margin-top: 5px;" th:if="${map.value eq false}">
+                                    <a href="login" style="font-size: 15px;" th:text="${map.key.productName}" ></a>
+                                    <span   class="label label-info glyphicon glyphicon-star-empty add_collect"
+                                            style="cursor:pointer; background-color: #fff; color:#f18d12;font-size: 15%;float:right;display: block;">收藏</span>
+                                    <span   class="label label-info  have_collect"
+                                            style="cursor:pointer; background-color: #fff; color:#f18d12;font-size: 15%;float:right;display: none;" >已收藏</span>
+                                    <input type="hidden" th:value="${map.key.id }" name="product_id"/>
+                                </h3>
+                                <p th:text="${map.key.productTitle}"></p>
                             </div>
                         </div>
                     </div>
@@ -310,22 +338,46 @@
 </script>
 <script th:inline="javascript">
     $(function(){
-        $(".care").click(function(){
-            alert("关注函数"+$(this).next().val());
+        $(".add_care").click(function(){
+//            alert("关注函数"+$(this).siblings('input').val());
+            var farm_id = $(this).siblings('input').val();
+            var care = $(this);
             $.ajax({
                 url:"care",
-                type:"get",
+                type:"post",
                 data:{
-                    farm_id:$(this).next().val()
+                    farm_id:farm_id
                 },
                 dataType:"text",
                 success:function(data){//回调函数
                     //data类型：String，json,xml,JS片段，HTML片段
                     alert(data);
-
+                    care.css('display','none');
+                    care.siblings('.have_care').css('display','block');
+                    care.sibling('.have_care').css('color','red');
                 }
             });
 
+        });
+        $(".add_collect").click(function () {
+//            alert("关注函数"+$(this).siblings('input').val());
+            var product_id = $(this).siblings('input').val();
+            var collect = $(this);
+            $.ajax({
+                url:"collect",
+                type:"post",
+                data:{
+                    product_id:product_id
+                },
+                dataType:"text",
+                success:function(data){//回调函数
+                    //data类型：String，json,xml,JS片段，HTML片段
+                    alert(data);
+                    collect.css('display','none');
+                    collect.siblings('.have_collect').css('display','block');
+                    collect.sibling('.have_collect').css('color','red');
+                }
+            });
         });
 
     });

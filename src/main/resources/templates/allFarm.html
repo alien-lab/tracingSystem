@@ -72,12 +72,12 @@
     </nav>
     <div id="menu2" class="menu">
         <ul>
-            <li style="margin-left: 123px;"><a href="/index" >首　　页</a></li>
+            <li style="margin-left: 123px;"><a href="/user_index" >首　　页</a></li>
             <li><a href="login">绿之源农场</a></li>
             <li><a href="login">绿之源鲜果</a></li>
             <!--<li><a href="/">绿之源批次</a></li>-->
-            <li><a href="login">所关注农场</a></li>
-            <li><a href="login">所收藏鲜果</a></li>
+            <!--<li><a href="login">所关注农场</a></li>-->
+            <!--<li><a href="login">所收藏鲜果</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right" >
             <li><img alt=" " th:src="@{'/head/'+${session.userInfo.getHead()}}" width="40px" height="40px" style="border-radius: 20px;"/></li>
@@ -104,7 +104,7 @@
                             <a   href="login" style="cursor:pointer; color:#0B79CE;font-size:18px;text-decoration: none;font-family:'微软雅黑','黑体','宋体';" th:text="${farmInfo.farmName}"></a>
                         </h2>
                         <div class="reason" style="height:30px;line-height: 20px;width: 672px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${farmInfo.farmTitle}"></label></div>
-                        <div class="jianjie" style="height:25px;width: 672px;font-family: '微软雅黑','黑体','宋体';">简介：<span th:text="${farmInfo.farmContent}"></span> <a target="_blank" style="color:#0B79CE;text-decoration: none">详情>></a></div>
+                        <div class="jianjie" style="height:25px;width: 672px;font-family: '微软雅黑','黑体','宋体';">简介：<span th:text="${farmInfo.farmContent}"></span> <a target="_blank" href="#" th:href="@{'/farmDesc?farm_id='+${farmInfo.id}}" style="color:#0B79CE;text-decoration: none">详情>></a></div>
                         <div class="jianjie_label" style="color:#0B79CE;height:20px;line-height: 20px;margin-top:10px;text-align: right;width:672px;font-family:'微软雅黑','黑体','宋体' ;">
                             <label class="label" style="color:#ff0000;" th:text="${farmInfo.likes}"></label>喜欢&nbsp;
                             <label class="label" style="color:#ff0000;" th:text="${farmInfo.dislikes}"></label>不喜欢&nbsp;

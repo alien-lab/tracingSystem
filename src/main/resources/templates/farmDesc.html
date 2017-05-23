@@ -66,8 +66,8 @@
             <li><a href="/allFarm">绿之源农场</a></li>
             <li><a href="/allProducts">绿之源鲜果</a></li>
             <!--<li><a href="/">绿之源批次</a></li>-->
-            <li><a href="/allCared">所关注农场</a></li>
-            <li><a href="/allCollected">所收藏鲜果</a></li>
+            <!--<li><a href="/allCared">所关注农场</a></li>-->
+            <!--<li><a href="/allCollected">所收藏鲜果</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right" >
             <li><img alt=" " th:src="@{'/head/'+${session.userInfo.getHead()}}" width="40px" height="40px" style="border-radius: 20px;"/></li>
@@ -103,11 +103,11 @@
                                     </h2>
                                     <div class="reason" style="height:30px;line-height: 20px;width: 700px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${farmInfo.farmTitle}"></label></div>
                                     <div class="jianjie" style="height:25px;width: 700px;font-family: '微软雅黑','黑体','宋体';">简介：<span th:text="${farmInfo.farmDesc}"></span> </div>
-                                   <!-- <div class="jianjie_label" style="color:#0B79CE;height:20px;line-height: 20px;margin-top:10px;text-align: right;width:700px;font-family:'微软雅黑','黑体','宋体' ;">
-                                        <label class="label" style="color:#ff0000;">15</label>喜欢&nbsp;
-                                        <label class="label" style="color:#ff0000;">5</label>不喜欢&nbsp;
-                                        <label class="label" style="color:#ff0000;">3</label>关注
-                                    </div>-->
+                                    <div class="jianjie_label" style="color:#0B79CE;height:20px;line-height: 20px;margin-top:60px;text-align: right;width:700px;font-family:'微软雅黑','黑体','宋体' ;">
+                                        <label class="label" style="color:#ff0000;" th:text="${farmInfo.likes}"></label>喜欢&nbsp;
+                                        <label class="label" style="color:#ff0000;" th:text="${farmInfo.dislikes}"></label>不喜欢&nbsp;
+                                        <label class="label" style="color:#ff0000;" th:text="${farmInfo.cares}"></label>关注
+                                    </div>
                                 </div>
 
                             </div>

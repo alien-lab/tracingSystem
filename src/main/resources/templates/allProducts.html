@@ -72,12 +72,12 @@
     </nav>
     <div id="menu2" class="menu">
         <ul>
-            <li style="margin-left: 123px;"><a href="/index" >首　　页</a></li>
+            <li style="margin-left: 123px;"><a href="/user_index" >首　　页</a></li>
             <li><a href="/allFarm">绿之源农场</a></li>
             <li><a href="/allProducts">绿之源鲜果</a></li>
             <!--<li><a href="/">绿之源批次</a></li>-->
-            <li><a href="/allCared">所关注农场</a></li>
-            <li><a href="/allCollected">所收藏鲜果</a></li>
+            <!--<li><a href="/allCared">所关注农场</a></li>-->
+            <!--<li><a href="/allCollected">所收藏鲜果</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right" >
             <li><img alt=" " th:src="@{'/head/'+${session.userInfo.getHead()}}" width="40px" height="40px" style="border-radius: 20px;"/></li>
@@ -90,6 +90,31 @@
 </div>
 <div id="center" style="margin-top: 102px;">
     <div class="container">
+        <div class="allProducts">
+            <div class="left_panel" style="border-bottom:1px dashed #cccccc;height:115px;margin-left:10px;
+                margin-right:10px;margin-top:10px;padding:0 10px;"  th:each="product:${productInfos}">
+                <div class="left_panel_image" style="float:left;height:115px;width:110px;">
+                    <a>
+                        <img th:src="@{'/img/productsuo/'+${product.productLogo }}" style="width:100px;height:80px;border:1px solid #cccccc;padding:6px;" />
+                    </a>
+                    <div class="query" style="color:#197F02;height:20px;width:110px;text-align:center;">查看数：<span style="color:#ff0000;" th:text="${product.looks}"></span>人</div>
+                </div>
+                <div class="left_panel_jieshao" style="float:left;height:115px;margin-left:25px;width: 672px;text-align:left;color:#333;">
+                    <h2 style="padding:0;margin:0;height: 25px; ">
+                        <a   href="login" style="cursor:pointer; color:#0B79CE;font-size:18px;text-decoration: none;font-family:'微软雅黑','黑体','宋体';" th:text="${product.productName}"></a>
+                    </h2>
+                    <div class="reason" style="height:30px;line-height: 20px;width: 672px;font-family: '微软雅黑','黑体','宋体';">推荐理由：<label style="font-weight:normal;" th:text="${product.productTitle}"></label></div>
+                    <div class="jianjie" style="height:25px;width: 672px;font-family: '微软雅黑','黑体','宋体';">简介：<span th:text="${product.productContent}"></span> <a target="_blank" href="#" th:href="@{'/productDesc?product_id='+${product.id}}" style="color:#0B79CE;text-decoration: none">详情>></a></div>
+                    <div class="jianjie_label" style="color:#0B79CE;height:20px;line-height: 20px;margin-top:60px;text-align: right;width:672px;font-family:'微软雅黑','黑体','宋体' ;">
+                        <label class="label" style="color:#ff0000;" th:text="${product.nice}"></label>好吃&nbsp;
+                        <label class="label" style="color:#ff0000;" th:text="${product.bad}"></label>不好吃&nbsp;
+                        <label class="label" style="color:#ff0000;" th:text="${product.collection}"></label>收藏
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
         <div class="center_top_farm" >
             <div class="media"  style="margin-top: 20px;" th:each="productInfo:${productInfos}">
                 <a class="pull-left" href="#">
